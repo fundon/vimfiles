@@ -17,7 +17,7 @@
 " Email: cfddream[at]gmail.com
 " Blog:
 " Create: 2012-01-20
-" Vim: set et sw=ts=sts=4 ft=vim ff=unix fenc=utf-8
+" Vim:set et sw=ts=sts=4 ft=vim ff=unix fenc=utf-8
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 
 " Check OS: {
