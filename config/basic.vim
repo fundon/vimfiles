@@ -141,9 +141,6 @@ set complete+=i
 set nrformats=octal,hex,alpha
 
 "set list
-"set listchars=tab:\ ·,eol:¬
-"set listchars+=trail:·
-"set listchars+=extends:»,precedes:«
 set listchars=tab:▸\ ,eol:¬
 set showbreak=↪ 
 set background=dark

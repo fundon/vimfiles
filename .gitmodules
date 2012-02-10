@@ -106,3 +106,6 @@
 [submodule "bundle/ragtag"]
 	path = bundle/ragtag
 	url = git://github.com/tpope/vim-ragtag.git
+[submodule "bundle/vim-mou"]
+	path = bundle/vim-mou
+	url = git://github.com/cfddream/vim-mou.git

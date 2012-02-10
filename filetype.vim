@@ -62,7 +62,7 @@ augroup filetypedetect
     au filetype css setlocal omnifunc=csscomplete#CompleteCSS
 
     " Ruby
-    au BufNewFile,BufRead *.rb  setf ruby
+    au BufNewFile,BufRead *.rb  setf ruby | set ts=2 sw=2 sts=2
     au filetype ruby setlocal omnifunc=rubycomplete#Complete
 
     " Enable omni completion.

@@ -11,14 +11,18 @@ vnoremap k gk
 noremap / /\v
 noremap ? ?\v
 
+" speed up scrolling of viewport slightly
+nnoremap <c-e> 2<c-e>
+nnoremap <c-y> 2<c-y>
+
 " undo redo undolist
 inoremap <c-z> <c-o>u
 nnoremap t <c-r>
 nnoremap <leader>ul :undolist<cr>
 
 " Encoding
-noremap <silent>eu :set fenc=utf-8<cr>:w!<cr>
-noremap <silent>ec :set fenc=cp936<cr>:w!<cr>
+noremap <silent>eu :set fenc=utf-8<cr><esc>:w!<cr>
+noremap <silent>ec :set fenc=cp936<cr><esc>:w!<cr>
 
 " Encode reopen Encoding
 noremap <silent>eru :e ++enc=utf-8 %<cr>
