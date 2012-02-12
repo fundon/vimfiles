@@ -35,6 +35,9 @@ augroup filetypedetect
     au filetype javascript call s:Dict()
     au filetype javascript setlocal omnifunc=javascriptcomplete#CompleteJS
 
+    " CoffeeScript
+    au BufNewFile,BufRead *.coffee setf coffee | set sw=2 foldmethod=indent expandtab
+
     " Lisp
     au BufNewFile,BufRead *.lisp setf lisp
 
