@@ -10,7 +10,7 @@ augroup filetypedetect
     au filetype c setlocal omnifunc=ccomplete#Complete
 
     " HTML
-    au BufNewFile,BufRead *.html,*.mustache setf html
+    au BufNewFile,BufRead *.html,*.mustache,*.ejs setf html
     let g:javascript_enable_domhtmlcss = 1
     let g:xml_use_xhtml = 1
 
@@ -31,12 +31,12 @@ augroup filetypedetect
     au filetype sh call s:Dict()
 
     " JavaScript, ECMAScript
-    au BufNewFile,BufRead *.{js,javascript,es,jsx} setf javascript
+    au BufNewFile,BufRead *.{js,javascript,es,jsx,json} setf javascript
     au filetype javascript call s:Dict()
     au filetype javascript setlocal omnifunc=javascriptcomplete#CompleteJS
 
     " CoffeeScript
-    au BufNewFile,BufRead *.coffee setf coffee | set sw=2 foldmethod=indent expandtab
+    au BufNewFile,BufRead *.coffee,Cakefile setf coffee | set sw=2 foldmethod=indent expandtab
 
     " Lisp
     au BufNewFile,BufRead *.lisp setf lisp
@@ -76,5 +76,7 @@ augroup filetypedetect
 augroup END
 
 fun! s:Dict()
-    let &dictionary .= substitute(g:MYVIM . '/dict/@.dict', '@', &filetype, '')
+    if matchstr(&dictionary, &filetype) == ''
+        let &dictionary .= substitute(g:MYVIM . '/dict/@.dict', '@', &filetype, '')
+    endif
 endfun
