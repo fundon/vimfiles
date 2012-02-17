@@ -76,7 +76,7 @@ augroup filetypedetect
 augroup END
 
 fun! s:Dict()
-    if matchstr(&dictionary, &filetype) == ''
+    if empty(matchstr(&dictionary, &filetype))
         let &dictionary .= substitute(g:MYVIM . '/dict/@.dict', '@', &filetype, '')
     endif
 endfun

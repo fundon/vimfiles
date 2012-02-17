@@ -6,6 +6,7 @@ rm -rf ~/.vim
 ln -sf $VIMFILES ~/.vim
 ln -sf $VIMFILES/vimrc ~/.vimrc
 ln -sf $VIMFILES/gvimrc ~/.gvimrc
+ln -sf $VIMFILES/rc/jshintrc ~/.jshintrc
 
 (cd $VIMFILES \
   && $CUR_PATH/initmodules.sh \
