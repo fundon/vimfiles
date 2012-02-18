@@ -1,7 +1,7 @@
 {
     // Settings
-    "passfail"      : false,  // Stop on first error.
-    "maxerr"        : 100,    // Maximum error before stopping.
+    "passfail"      : false,  // Stop on first error.                                                                                                       报错即停止
+    "maxerr"        : 100,    // Maximum error before stopping.                                                                                             设定错误阀值
 
 
     // Predefined globals whom JSHint will ignore.
@@ -36,36 +36,36 @@
 
 
     // The Good Parts.
-    "asi"           : false,  // Tolerate Automatic Semicolon Insertion (no semicolons).
-    "laxbreak"      : true,   // Tolerate unsafe line breaks e.g. `return [\n] x` without semicolons.
-    "bitwise"       : true,   // Prohibit bitwise operators (&, |, ^, etc.).
-    "boss"          : false,  // Tolerate assignments inside if, for & while. Usually conditions & loops are for comparison, not assignments.
-    "curly"         : true,   // Require {} for every new block or scope.
-    "eqeqeq"        : true,   // Require triple equals i.e. `===`.
-    "eqnull"        : false,  // Tolerate use of `== null`.
-    "evil"          : false,  // Tolerate use of `eval`.
+    "asi"           : false,  // Tolerate Automatic Semicolon Insertion (no semicolons).                                                                    分号
+    "laxbreak"      : true,   // Tolerate unsafe line breaks e.g. `return [\n] x` without semicolons.                                                       换行
+    "bitwise"       : false,   / Prohibit bitwise operators (&, |, ^, etc.).                                                                                位运算
+    "boss"          : false,  // Tolerate assignments inside if, for & while. Usually conditions & loops are for comparison, not assignments.               赋值语句
+    "curly"         : true,   // Require {} for every new block or scope.                                                                                   {} 包裹
+    "eqeqeq"        : true,   // Require triple equals i.e. `===`.                                                                                          强比较
+    "eqnull"        : false,  // Tolerate use of `== null`.                                                                                                 == 比较
+    "evil"          : false,  // Tolerate use of `eval`.                                                                                                    允许 eval
     "expr"          : false,  // Tolerate `ExpressionStatement` as Programs.
     "forin"         : false,  // Tolerate `for in` loops without `hasOwnPrototype`.
-    "immed"         : true,   // Require immediate invocations to be wrapped in parens e.g. `( function(){}() );`
+    "immed"         : true,   // Require immediate invocations to be wrapped in parens e.g. `( function(){}() );`                                           true: (function (){}()) false: (function() {})()
     "latedef"       : true,   // Prohipit variable use before definition.
     "loopfunc"      : false,  // Allow functions to be defined within loops.
-    "noarg"         : true,   // Prohibit use of `arguments.caller` and `arguments.callee`.
+    "noarg"         : true,   // Prohibit use of `arguments.caller` and `arguments.callee`.                                                                 禁止使用，arguments.callee -> 当前执行的函数，ES5 严格模式中被禁用；arguments.callee -> 调用当前函数的函数（如果有的话），JS 引擎实现不一致
     "regexp"        : true,   // Prohibit `.` and `[^...]` in regular expressions.
     "regexdash"     : false,  // Tolerate unescaped last dash i.e. `[-...]`.
     "scripturl"     : true,   // Tolerate script-targeted URLs.
     "shadow"        : false,  // Allows re-define variables later in code e.g. `var x=1; x=2;`.
     "supernew"      : false,  // Tolerate `new function () { ... };` and `new Object;`.
-    "undef"         : true,   // Require all non-global variables be declared before they are used.
+    "undef"         : true,   // Require all non-global variables be declared before they are used.                                                         全局，使用前先声明
 
 
     // Personal styling prefrences.
-    "newcap"        : true,   // Require capitalization of all constructor functions e.g. `new F()`.
-    "noempty"       : true,   // Prohipit use of empty blocks.
+    "newcap"        : true,   // Require capitalization of all constructor functions e.g. `new F()`.                                                        构造函数名以大写字母开头
+    "noempty"       : true,   // Prohipit use of empty blocks.                                                                                              禁止出现空代码片段
     "nonew"         : true,   // Prohibit use of constructors for side-effects.
-    "nomen"         : true,   // Prohibit use of initial or trailing underbars in names.
+    "nomen"         : true,   // Prohibit use of initial or trailing underbars in names.                                                                    禁止以下滑线开头声名变量
     "onevar"        : false,  // Allow only one `var` statement per function.
     "plusplus"      : false,  // Prohibit use of `++` & `--`.
     "sub"           : false,  // Tolerate all forms of subscript notation besides dot notation e.g. `dict['key']` instead of `dict.key`.
     "trailing"      : true,   // Prohibit trailing whitespaces.
-    "white"         : true    // Check against strict whitespace and indentation rules.
+    "white"         : true    // Check against strict whitespace and indentation rules.                                                                     空白
 }
