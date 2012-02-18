@@ -13,10 +13,17 @@ map <silent> <F11> :if &guioptions =~# 'T' <Bar>
 if g:OS == 1
     set guioptions=cMg
 elseif g:OS == 2
-    set transparency=8
+    set guioptions=cMg
     "set guifont=Monaco:h14
     set guifont=Inconsolata:h15
-
+    " Map Cmd+<n> to move to tab <n>.
+    for item in range(1,9)
+        silent exec "map <D-".item."> :tabn ".item."<cr>"
+        silent exec "map! <D-".item."> <C-O>:tabn ".item."<cr>"
+    endfor
+    set transparency=8
+    let macvim_hig_shift_movement=1
+    set antialias
 elseif g:OS == 3
     set guioptions=cMg
     set langmenu=zh_CN
