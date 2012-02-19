@@ -38,7 +38,7 @@
     // The Good Parts.
     "asi"           : false,  // Tolerate Automatic Semicolon Insertion (no semicolons).                                                                    分号
     "laxbreak"      : true,   // Tolerate unsafe line breaks e.g. `return [\n] x` without semicolons.                                                       换行
-    "bitwise"       : false,   / Prohibit bitwise operators (&, |, ^, etc.).                                                                                位运算
+    "bitwise"       : false,  // Prohibit bitwise operators (&, |, ^, etc.).                                                                                位运算
     "boss"          : false,  // Tolerate assignments inside if, for & while. Usually conditions & loops are for comparison, not assignments.               赋值语句
     "curly"         : true,   // Require {} for every new block or scope.                                                                                   {} 包裹
     "eqeqeq"        : true,   // Require triple equals i.e. `===`.                                                                                          强比较
