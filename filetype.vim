@@ -61,8 +61,12 @@ augroup filetypedetect
     au filetype vim setl keywordprg=:help
 
     " CSS
-    au BufNewFile,BufRead *.css setf css
+    au BufNewFile,BufRead *.css setf css | set ts=2 sw=2 sts=2
     au filetype css setlocal omnifunc=csscomplete#CompleteCSS
+
+    " LESS
+    au BufNewFile,BufRead *.less setf less | set ts=2 sw=2 sts=2
+    au filetype less setlocal omnifunc=csscomplete#CompleteCSS
 
     " Ruby
     au BufNewFile,BufRead *.rb  setf ruby | set ts=2 sw=2 sts=2
