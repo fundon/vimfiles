@@ -24,7 +24,7 @@ filetype off
     runtime config/pathogen.vim
 "endif
 
-colorscheme molokai
+colorscheme solarized
 
 filetype plugin indent on
 " }}}

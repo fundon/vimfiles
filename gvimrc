@@ -15,7 +15,7 @@ if g:OS == 1
 elseif g:OS == 2
     set guioptions=cMg
     "set guifont=Monaco:h14
-    set guifont=Inconsolata:h15
+    set guifont=Inconsolata-dz:h12
     " Map Cmd+<n> to move to tab <n>.
     for item in range(1,9)
         silent exec "map <D-".item."> :tabn ".item."<cr>"

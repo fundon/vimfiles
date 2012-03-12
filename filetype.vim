@@ -13,6 +13,7 @@ augroup filetypedetect
     au BufNewFile,BufRead *.html,*.mustache,*.ejs setf html
     let g:javascript_enable_domhtmlcss = 1
     let g:xml_use_xhtml = 1
+    au filetype xml setlocal omnifunc=xmlcomplete#CompleteTags
 
     " Markdown
     au BufNewFile,BufRead *.{md,mkd,mark,markdown} setf mkd | set ts=2 sw=2 expandtab
@@ -40,6 +41,8 @@ augroup filetypedetect
 
     " Lisp
     au BufNewFile,BufRead *.lisp setf lisp
+
+    au BufNewFile,BufRead *.lua setf lua
 
     " Taskwarrior configuration file
     au BufNewFile,BufRead .taskrc setf taskrc
@@ -72,10 +75,12 @@ augroup filetypedetect
     au BufNewFile,BufRead *.rb  setf ruby | set ts=2 sw=2 sts=2
     au filetype ruby setlocal omnifunc=rubycomplete#Complete
 
-    " Enable omni completion.
+    " Python
+    au BufNewFile,BufRead *.py setf python
     au filetype python setlocal omnifunc=pythoncomplete#Complete
+
+    " Enable omni completion.
     "au filetype sql setlocal omnifunc=sqlcomplete#Complete
-    au filetype xml setlocal omnifunc=xmlcomplete#CompleteTags
 
 augroup END
 
