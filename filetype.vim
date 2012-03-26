@@ -65,7 +65,7 @@ augroup filetypedetect
     au BufWritePost .vimrc source <afile>
     au BufWritePost .gvimrc source <afile>
     " shift+k, open vim help
-    au filetype vim setl keywordprg=:help
+    au FileType vim setl keywordprg=:help
 
     " CSS & LESS
     au BufNewFile,BufRead *.css setf css
@@ -80,7 +80,7 @@ augroup filetypedetect
 
     " Python
     au BufNewFile,BufRead *.py setf python
-    au filetype python setlocal omnifunc=pythoncomplete#Complete
+    au FileType python setlocal omnifunc=pythoncomplete#Complete
 
     " Enable omni completion.
     "au filetype sql setlocal omnifunc=sqlcomplete#Complete
