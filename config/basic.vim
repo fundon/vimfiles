@@ -24,7 +24,7 @@ set hidden
 set nobackup
 set nowritebackup
 set noswapfile
-let &undodir=g:MYVIM . "/und"
+let &undodir=g:MYVIM . "/undo"
 
 " Search
 set magic
@@ -140,8 +140,9 @@ set complete+=i
 " Enable CTRL-A/CTRL-X to work on octal and hex numbers, as well as characters
 set nrformats=octal,hex,alpha
 
-"set list
 "set listchars=tab:▸\ ,eol:¬,trail:·,extends:↷,precedes:↶
+set listchars=tab:▸\ ,trail:·,eol:¬,nbsp:_
+set list
 set showbreak=↪ 
 set background=dark
 
@@ -149,6 +150,8 @@ set background=dark
 "tabpages-选项卡 winsize-窗口大小 slash-转换文件路径中的\为/以使session文件兼容unix
 "unix-设置session文件中的换行模式为unix
 set sessionoptions=blank,buffers,curdir,folds,help,options,tabpages,winsize,slash,unix,resize
+
+set title
 
 set helplang=cn,en
 
