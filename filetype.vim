@@ -7,20 +7,22 @@ augroup filetypedetect
 
     " C
     au BufNewFile,BufRead *.c setf c
-    au filetype c setlocal omnifunc=ccomplete#Complete
+    au FileType c setlocal omnifunc=ccomplete#Complete
 
     " HTML
     au BufNewFile,BufRead *.html,*.mustache,*.ejs setf html
+    au FileType xml setlocal omnifunc=xmlcomplete#CompleteTags
     let g:javascript_enable_domhtmlcss = 1
     let g:xml_use_xhtml = 1
-    au filetype xml setlocal omnifunc=xmlcomplete#CompleteTags
 
     " Markdown
-    au BufNewFile,BufRead *.{md,mkd,mark,markdown} setf mkd | set ts=2 sw=2 expandtab
-    au filetype html,mkd setlocal omnifunc=htmlcomplete#CompleteTags
+    au BufNewFile,BufRead *.{md,mkd,mark,markdown} setf mkd
+    au FileType mkd set ts=2 sw=2 et
+    au FileType html,mkd setlocal omnifunc=htmlcomplete#CompleteTags
 
     " Makefile
-    au BufNewFile,BufRead {Makefile,makefile} setf make | set noexpandtab
+    au BufNewFile,BufRead {Makefile,makefile} setf make
+    au FileType make set noet
 
     " PHP
     au BufNewFile,BufRead *.php setf php
@@ -28,16 +30,18 @@ augroup filetypedetect
     au filetype php setlocal omnifunc=phpcomplete#CompletePHP
 
     " SH
-    au BufNewFile,BufRead *.sh,.zshrc setf sh | set ts=2 sw=2 sts=2
-    au filetype sh call s:Dict()
+    au BufNewFile,BufRead *.sh,.zshrc setf sh
+    au FileType sh set ts=2 sw=2 sts=2
+    au FileType sh call s:Dict()
 
     " JavaScript, ECMAScript
     au BufNewFile,BufRead *.{js,javascript,es,jsx,json} setf javascript
-    au filetype javascript call s:Dict()
-    au filetype javascript setlocal omnifunc=javascriptcomplete#CompleteJS
+    au FileType javascript call s:Dict()
+    au FileType javascript setlocal omnifunc=javascriptcomplete#CompleteJS
 
     " CoffeeScript
-    au BufNewFile,BufRead *.coffee,Cakefile setf coffee | set sw=2 foldmethod=indent expandtab
+    au BufNewFile,BufRead *.coffee,Cakefile setf coffee
+    au FileType coffee set sw=2 fdm=indent et
 
     " Lisp
     au BufNewFile,BufRead *.lisp setf lisp
@@ -63,17 +67,16 @@ augroup filetypedetect
     " shift+k, open vim help
     au filetype vim setl keywordprg=:help
 
-    " CSS
-    au BufNewFile,BufRead *.css setf css | set ts=2 sw=2 sts=2
-    au filetype css setlocal omnifunc=csscomplete#CompleteCSS
-
-    " LESS
-    au BufNewFile,BufRead *.less setf less | set ts=2 sw=2 sts=2
-    au filetype less setlocal omnifunc=csscomplete#CompleteCSS
+    " CSS & LESS
+    au BufNewFile,BufRead *.css setf css
+    au BufNewFile,BufRead *.less setf less
+    au FileType css,less setlocal omnifunc=csscomplete#CompleteCSS
+    au FileType css,less set ts=2 sw=2 sts=2
 
     " Ruby
-    au BufNewFile,BufRead *.rb  setf ruby | set ts=2 sw=2 sts=2
-    au filetype ruby setlocal omnifunc=rubycomplete#Complete
+    au BufNewFile,BufRead *.rb setf ruby
+    au FileType rb set ts=2 sw=2 sts=2
+    au FileType ruby setlocal omnifunc=rubycomplete#Complete
 
     " Python
     au BufNewFile,BufRead *.py setf python
