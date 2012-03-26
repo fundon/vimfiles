@@ -1,6 +1,10 @@
 " Plugins " {{{
 
 " Syntastic
+let g:syntastic_mode_map = { 'mode': 'passive',
+    \ 'active_filetypes': ['ruby', 'php'],
+    \ 'passive_filetypes': ['puppet'] }
+
 "mark syntax errors with :signs
 let g:syntastic_enable_signs    = 1
 "automatically jump to the error when saving the file
