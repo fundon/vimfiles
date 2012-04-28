@@ -11,9 +11,13 @@ vnoremap k gk
 noremap / /\v
 noremap ? ?\v
 
+" ctrl+j/ctrl+k to move up/down in insert mode
+inoremap <C-j> <C-o>gj
+inoremap <C-k> <C-o>gk
+
 " speed up scrolling of viewport slightly
-nnoremap <c-e> 2<c-e>
-nnoremap <c-y> 2<c-y>
+nnoremap <c-e> 3<c-e>
+nnoremap <c-y> 3<c-y>
 
 " undo redo undolist
 inoremap <c-z> <c-o>u
@@ -38,15 +42,18 @@ nnoremap <leader>v "+P
 vnoremap <leader>v "+p
 nnoremap <leader>a ggVG
 
-if g:OS == 1 " Linux
-    " copy current path
-    nnoremap <silent><leader>p :let @* = expand('%:p')<cr>
-    nnoremap <leader>cp y:call system("xclip -i -selection clipboard", getreg("\""))<cr>:call system("xclip -i", getreg("\""))<cr>
-    nnoremap <leader>vv :call setreg("\"",system("xclip -o -selection clipboard"))<cr>p
-elseif g:OS == 2 " Max OXS pbcopy/pbpaste
-    nnoremap <silent><leader>p :call system('pbcopy', expand('%:p'))<cr>
-    vnoremap <leader>cp y:call system('pbcopy', getreg("\""))<cr>
-    nnoremap <leader>vv :call setreg("\"",system('pbpaste'))<cr>p
+" Allows multiple lines to be pasted correctly
+vnoremap p <Esc>:let current_reg = @"<CR>gvs<C-R>=current_reg<CR><Esc>
+
+if g:LINUX " Linux
+  " copy current path
+  nnoremap <silent><leader>p :let @* = expand('%:p')<cr>
+  nnoremap <leader>cp y:call system("xclip -i -selection clipboard", getreg("\""))<cr>:call system("xclip -i", getreg("\""))<cr>
+  nnoremap <leader>vv :call setreg("\"",system("xclip -o -selection clipboard"))<cr>p
+elseif g:MAC " Max OXS pbcopy/pbpaste
+  nnoremap <silent><leader>p :call system('pbcopy', expand('%:p'))<cr>
+  vnoremap <leader>cp y:call system('pbcopy', getreg("\""))<cr>
+  nnoremap <leader>vv :call setreg("\"",system('pbpaste'))<cr>p
 endif
 
 " Backspace in Visual mode deletes selection
@@ -98,13 +105,25 @@ noremap <c-down> mz:m+<cr>`z
 
 " Tabs
 nnoremap <leader>lt :tabs<cr>
-nnoremap <leader>tt :tabnew<cr>
+nnoremap <leader>tn :tabnew<cr>
 nnoremap <leader>n :silent tabprev<cr>
 nnoremap <leader>m :silent tabnext<cr>
 nnoremap <leader>tf :silent tabfirst<cr>
 nnoremap <leader>tl :silent tablast<cr>
 nnoremap <c-tab>:silent tabnext<cr>
 nnoremap <c-s-tab>:silent tabprev<cr>
+nnoremap <leader>tt :call SwitchLastUsedTab()<cr>
+fun! SwitchLastUsedTab()
+  if exists("g:LastUsedTabPage")
+    exec "tabnext" g:LastUsedTabPage
+  endif
+endfun
+
+" Faster split resizing (+,-)
+if bufwinnr(1)
+  map + <C-W>+
+  map - <C-W>-
+endif
 
 " Move Windoes
 nnoremap <c-k> <c-w>k
@@ -126,8 +145,8 @@ vnoremap <s-tab> <gv
 
 " Line Number
 noremap <silent><F2> :if &nu\|se rnu\
-    \|elsei &rnu\|se rnu!\
-    \|el\|se nu\|endif<cr>
+  \|elsei &rnu\|se rnu!\
+  \|el\|se nu\|endif<cr>
 
 " ListChar
 noremap <silent><F4> :set invlist<cr>
@@ -138,10 +157,35 @@ noremap <silent><F7> :%s/\s\+$//g<cr>``
 
 " normal: 3id, insert ddd. :help .
 
+iab YDATE <C-R>=strftime("%a %b %d %T %Y")
 map <silent><leader>d o<esc>:r!date +'\%A, \%B \%d, \%Y'<cr>\
-    \:r!date +'\%A, \%B \%d, \%Y' \| sed 's/./-/g'<cr>A<cr><esc>
+  \:r!date +'\%A, \%B \%d, \%Y' \| sed 's/./-/g'<cr>A<cr><esc>
 
 " Change charset by ,ee
 noremap <silent><leader>ee :emenu Encoding.<tab>
 noremap <leader>eo :e <c-r>=expand('%:h').'/'<cr>
+
+" :VD
+cnoremap VD $HOME/Develop/VD
+cnoremap WD $HOME/Works
+
+" ctrl - ]
+norea #v # vim: set et ts=2 sts=2 sw=2 :<Esc>0f=
+
+" Hard to type things
+imap >> →
+imap << ←
+imap ^^ ↑
+imap VV ↓
+imap aa λ
+
+" Buffer navigation (,,) (,]) (,[) (,ls)
+map <Leader>, <C-^>
+" :map <Leader>] :bnext<CR>
+" :map <Leader>[ :bprev<CR>
+map <Leader>ls :buffers<CR>
+
+"Toggle fold visibility
+nnoremap <leader>z za
+
 " "}}}

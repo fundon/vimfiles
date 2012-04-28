@@ -1,9 +1,9 @@
 " Plugins " {{{
-
+let g:surround_{char2nr("t")} = "<\1\r..*\r&\1>\r\1\r..*\r&\1>"
 " Syntastic
 let g:syntastic_mode_map = { 'mode': 'passive',
-    \ 'active_filetypes': ['ruby', 'php'],
-    \ 'passive_filetypes': ['puppet'] }
+  \ 'active_filetypes': [],
+  \ 'passive_filetypes': ['puppet'] }
 
 "mark syntax errors with :signs
 let g:syntastic_enable_signs    = 1
@@ -25,8 +25,8 @@ nnoremap <leader>f :NERDTree<cr>:NERDTreeClose<cr>:NERDTreeFind<cr>
 
 " NERDCommter
 if has("gui_macvim")
-    let macvim_skip_hig_shift_movement = 1
-    map <D-/> ,c<space>
+  let macvim_skip_hig_shift_movement = 1
+  map <D-/> ,c<space>
 endif
 
 " Ack
@@ -36,7 +36,7 @@ let g:ackprg = "ack-grep -H --nocolor --nogroup --column"
 nnoremap <leader>rt :!ctags --extra=+f -R *<cr><cr>
 
 " Taglist
-let Tlist_Ctags_Cmd                 = $HOME . "/Homebrew/bin/ctags"
+let Tlist_Ctags_Cmd                 = $HOME . "/Develop/VD/bin/ctags"
 let Tlist_Auto_Highlight_Tag        = 0
 let Tlist_Auto_Open                 = 0
 let Tlist_Compact_Format            = 1
@@ -54,10 +54,16 @@ let Tlist_Use_SingleClick           = 1
 let Tlist_JS_Settings               = 'javascript;s:string;a:array;o:object;f:function'
 
 " Tarbar
-let g:tagbar_ctags_bin = $HOME . "/Homebrew/bin/ctags"
+let g:tagbar_ctags_bin = $HOME . "/Develop/VD/bin/ctags"
 nnoremap <silent><F6> :TagbarToggle<cr>
 
 " RagTag
 let g:ragtag_global_maps = 1
+
+" Zencoding
+let g:user_zen_expandabbr_key = '<c-j>'
+let g:user_zen_settings       = {
+  \ 'indentation': ' ',
+  \}
 
 " }}}

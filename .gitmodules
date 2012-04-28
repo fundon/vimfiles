@@ -97,9 +97,6 @@
 [submodule "bundle/xml"]
 	path = bundle/xml
 	url = git://github.com/othree/xml.vim.git
-[submodule "bundle/tomorrow"]
-	path = bundle/tomorrow
-	url = git://github.com/ChrisKempson/Vim-Tomorrow-Theme.git
 [submodule "bundle/colorizer"]
 	path = bundle/colorizer
 	url = git://github.com/lilydjwg/colorizer.git

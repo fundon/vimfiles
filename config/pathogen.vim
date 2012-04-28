@@ -1,3 +1,3 @@
-let &rtp = g:MYVIM . '/bundle/pathogen,' . &rtp
-call pathogen#infect()
-call pathogen#helptags()
+sil! run bundle/pathogen/autoload/pathogen.vim
+sil! cal pathogen#infect()
+sil! cal pathogen#helptags()
