@@ -115,3 +115,6 @@
 [submodule "bundle/ctrlp"]
 	path = bundle/ctrlp
 	url = git://github.com/kien/ctrlp.vim.git
+[submodule "bundle/jscomplete"]
+	path = bundle/jscomplete
+	url = git://github.com/cfddream/jscomplete-vim.git

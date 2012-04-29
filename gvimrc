@@ -1,9 +1,11 @@
-set lazyredraw
+set columns=88
+set lines=55
 set guicursor+=a:blinkon0
-set mousemodel=popup
+set guioptions=ace
+set guioptions-=mTlLrR
+set mousehide
 
-set list
-set listchars=tab:▸\ ,eol:¬,trail:·,extends:↷,precedes:↶
+let g:solarized_visibility='low'
 
 map <silent> <F11> :if &guioptions =~# 'T' <Bar>
   \ set guioptions-=T <Bar>
@@ -13,10 +15,9 @@ map <silent> <F11> :if &guioptions =~# 'T' <Bar>
   \ set guioptions+=m <Bar>
   \ endif<cr>
 
-if g:OS == 1
-  set guioptions=cMg
-elseif g:OS == 2
-  set guioptions=cMg
+
+if g:LINUX
+elseif g:MAC
   "set guifont=Monaco:h14
   set guifont=Inconsolata-dz:h12
   " Map Cmd+<n> to move to tab <n>.
@@ -25,12 +26,13 @@ elseif g:OS == 2
     silent exec "map! <D-".item."> <C-O>:tabn ".item."<cr>"
   endfor
 
+  macmenu &File.New\ Tab key=<nop>
+  map <leader>t <Plug>PeepOpen
   set transparency=8
   set macmeta
   let macvim_hig_shift_movement = 1
   set antialias
-elseif g:OS == 3
-  set guioptions=cMg
+elseif g:WIN
   set langmenu=zh_CN
   language messages zh_CN.utf-8
   source $VIMRUNTIME/delmenu.vim
