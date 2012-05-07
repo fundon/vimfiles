@@ -1,9 +1,9 @@
 " Plugins " {{{
 let g:surround_{char2nr("t")} = "<\1\r..*\r&\1>\r\1\r..*\r&\1>"
 " Syntastic
-let g:syntastic_mode_map = { 'mode': 'passive',
+let g:syntastic_mode_map = {'mode': 'passive',
   \ 'active_filetypes': [],
-  \ 'passive_filetypes': ['puppet'] }
+  \ 'passive_filetypes': ['puppet']}
 
 "mark syntax errors with :signs
 let g:syntastic_enable_signs    = 1
@@ -65,5 +65,14 @@ let g:user_zen_expandabbr_key = '<c-j>'
 let g:user_zen_settings       = {
   \ 'indentation': ' ',
   \}
+
+" ctrip
+let g:ctrlp_map = '<c-p>'
+
+" jscomplete
+"let g:jscomplete_use = ['node']
+
+" Mou.app
+let g:mou_dir = "$HOME/Apps/Mou.app"
 
 " }}}

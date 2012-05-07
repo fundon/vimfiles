@@ -1,4 +1,4 @@
-" Key mappings " {{{
+" Key mappings " {{{1
 let mapleader = ','
 
 " Arrow keys
@@ -11,9 +11,13 @@ vnoremap k gk
 noremap / /\v
 noremap ? ?\v
 
-" ctrl+j/ctrl+k to move up/down in insert mode
-inoremap <C-j> <C-o>gj
-inoremap <C-k> <C-o>gk
+nnoremap <c-z> :shell<cr>
+
+" ctrl+j/ctrl+k to move up/right/down/left in insert mode
+inoremap <m-k> <C-o>gk
+inoremap <m-l> <C-o>l
+inoremap <m-j> <C-o>gj
+inoremap <m-h> <C-o>h
 
 " speed up scrolling of viewport slightly
 nnoremap <c-e> 3<c-e>
@@ -121,8 +125,8 @@ endfun
 
 " Faster split resizing (+,-)
 if bufwinnr(1)
-  map + <C-W>+
-  map - <C-W>-
+  nnoremap + <c-w>+
+  nnoremap - <c-w>-
 endif
 
 " Move Windoes
@@ -130,6 +134,7 @@ nnoremap <c-k> <c-w>k
 nnoremap <c-l> <c-w>l
 nnoremap <c-j> <c-w>j
 nnoremap <c-h> <c-w>h
+nnoremap <leader>w <c-w>v<c-w>l
 
 " <c-0> rest
 map <c-kPlus> <c-w>+
@@ -143,23 +148,18 @@ noremap <s-tab> v<
 vnoremap <tab> >gv
 vnoremap <s-tab> <gv
 
-" Line Number
-noremap <silent><F2> :if &nu\|se rnu\
-  \|elsei &rnu\|se rnu!\
-  \|el\|se nu\|endif<cr>
-
 " ListChar
 noremap <silent><F4> :set invlist<cr>
 
 " Trim trailling whitespace ^M
 noremap <leader>M :%s/\r//g<cr>
-noremap <silent><F7> :%s/\s\+$//g<cr>``
+noremap <silent><F7> :silent %s/\s\+$//g<cr>``
 
 " normal: 3id, insert ddd. :help .
 
-iab YDATE <C-R>=strftime("%a %b %d %T %Y")
-map <silent><leader>d o<esc>:r!date +'\%A, \%B \%d, \%Y'<cr>\
-  \:r!date +'\%A, \%B \%d, \%Y' \| sed 's/./-/g'<cr>A<cr><esc>
+iab YDATE <C-R>=strftime("%H:%M:%S %m/%d/%Y")
+map <silent><leader>d o<esc>:r!date +'\%H:\%M:\%S \%m/\%d/\%Y'<cr>\
+  \:r!date +'\%H:\%M:\%S \%m/\%d/\%Y' \| sed 's/./-/g'<cr>A<cr><esc>
 
 " Change charset by ,ee
 noremap <silent><leader>ee :emenu Encoding.<tab>
@@ -185,7 +185,46 @@ map <Leader>, <C-^>
 " :map <Leader>[ :bprev<CR>
 map <Leader>ls :buffers<CR>
 
-"Toggle fold visibility
+" Toggles {{{2
+
+  " Toggle wrap/no wrap
+nnoremap <leader>wr :set nowrap! nowrap?<cr>
+
+" Toggle paste mode
+nnoremap <leader>pa :set paste! paste?<cr>
+
+" Toggle line numbers
+nnoremap <leader>n ::if &nu\|se rnu\
+  \|elsei &rnu\|se rnu!\
+  \|el\|se nu\|endif<cr>
+
+" Toggle Background color
+nnoremap <leader>bg :let &bg = &bg == 'dark' ? 'light' : 'dark'<cr>
+
+" Toggle fold visibility
 nnoremap <leader>z za
 
-" "}}}
+" 2}}}
+
+" Formatting/editing text {{{2
+
+" opt+U to toggle word case
+nnoremap <m-u> g~iw
+vnoremap <m-u> g~i
+inoremap <m-u> <c-o>g~iw
+
+" Format paragraph
+vnoremap <c-q> gq
+nnoremap <c-q> gqap
+inoremap <c-q> <c-o>gqap
+
+" create a new line below the current one and jump to it
+inoremap <m-o> <C-o>o
+
+" Different indentations
+nnoremap <leader>2s :set sw=2 sts=2 ts=2<cr>
+nnoremap <leader>4s :set sw=4 sts=4 ts=4<cr>
+
+" 2}}}
+
+" 1}}}

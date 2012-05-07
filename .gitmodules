@@ -115,3 +115,6 @@
 [submodule "bundle/jscomplete"]
 	path = bundle/jscomplete
 	url = git://github.com/cfddream/jscomplete-vim.git
+[submodule "bundle/snipmate"]
+	path = bundle/snipmate
+	url = git://github.com/msanders/snipmate.vim.git

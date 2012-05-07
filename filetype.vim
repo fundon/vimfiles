@@ -53,10 +53,9 @@ augroup filetypedetect
 
   " JavaScript, ECMAScript
   au BufNewFile,BufRead *.{js,javascript,es,jsx,json} setf javascript
+  au FileType javascript setl omnifunc=javascriptcomplete#CompleteJS
   au FileType javascript call s:Dict()
   au FileType javascript set ts=2 sw=2 sts=2
-  au FileType javascript
-    \ :setl omnifunc=jscomplete#CompleteJS
 
   " CoffeeScript
   au BufNewFile,BufRead *.coffee,Cakefile setf coffee
@@ -128,7 +127,7 @@ au filetypedetect BufNewFile,BufRead,StdinReadPost *
 
 fun! s:Dict()
   if empty(matchstr(&dictionary, &filetype))
-    let &dictionary .= substitute(g:MYVIM . '/dict/@.dict', '@', &filetype, '')
+    let &dictionary = substitute(g:MYVIM . '/dict/@.dict,' . &dictionary, '@', &filetype, '')
   endif
 endfun
 
