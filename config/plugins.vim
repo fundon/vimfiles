@@ -1,4 +1,7 @@
 " Plugins " {{{
+
+let g:Powerline_symbols = 'fancy'
+
 let g:surround_{char2nr("t")} = "<\1\r..*\r&\1>\r\1\r..*\r&\1>"
 " Syntastic
 let g:syntastic_mode_map = {'mode': 'passive',
@@ -68,9 +71,13 @@ let g:user_zen_settings       = {
 
 " ctrip
 let g:ctrlp_map = '<c-p>'
+let g:ctrlp_tabpage_position = 'ac'
+
+" neocomplcache
+let g:neocomplcache_enable_at_startup = 1
 
 " jscomplete
-"let g:jscomplete_use = ['node']
+let g:jscomplete_use = ['dom', 'moz']
 
 " Mou.app
 let g:mou_dir = "$HOME/Apps/Mou.app"

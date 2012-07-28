@@ -16,24 +16,26 @@ augroup filetypedetect
 
   au BufReadPost * syntax sync fromstart
 
+  au WinLeave * set nocursorline
+  au WinLeave * set cursorline
   au TabLeave * let g:LastUsedTabPage=tabpagenr()
 
   " C
   au BufNewFile,BufRead *.c,*.h setf c
+  au FileType c setl omnifunc=ccomplete#Complete
   au FileType c set ts=2 sw=2 sts=2 et
-  au FileType c setlocal omnifunc=ccomplete#Complete
 
   " HTML
   au BufNewFile,BufRead *.html,*.mustache,*.ejs setf html
-  au FileType xml setlocal omnifunc=xmlcomplete#CompleteTags
+  au FileType xml setl omnifunc=xmlcomplete#CompleteTags
   au FileType html set ts=2 sw=2 sts=2 et
   let g:javascript_enable_domhtmlcss = 1
   let g:xml_use_xhtml = 1
 
   " Markdown
   au BufNewFile,BufRead *.{md,mkd,mark,markdown} setf mkd
+  au FileType html,mkd setl omnifunc=htmlcomplete#CompleteTags
   au FileType mkd set ts=2 sw=2 sts=2 et
-  au FileType html,mkd setlocal omnifunc=htmlcomplete#CompleteTags
 
   " Makefile
   au BufNewFile,BufRead {Makefile,makefile} setf make
@@ -41,8 +43,8 @@ augroup filetypedetect
 
   " PHP
   au BufNewFile,BufRead *.php setf php
-  au filetype php call s:Dict()
   au filetype php setlocal omnifunc=phpcomplete#CompletePHP
+  au filetype php call s:Dict()
 
   " SH
   au BufNewFile,BufRead *.sh,.zshrc setf sh
@@ -53,7 +55,9 @@ augroup filetypedetect
 
   " JavaScript, ECMAScript
   au BufNewFile,BufRead *.{js,javascript,es,jsx,json} setf javascript
-  au FileType javascript setl omnifunc=javascriptcomplete#CompleteJS
+  "au FileType javascript setl omnifunc=javascriptcomplete#CompleteJS
+  au FileType javascript setl omnifunc=jscomplete#CompleteJS
+  au filetype javascript setl foldmethod=marker foldmarker={,}
   au FileType javascript call s:Dict()
   au FileType javascript set ts=2 sw=2 sts=2
 
@@ -90,20 +94,21 @@ augroup filetypedetect
   " CSS & LESS
   au BufNewFile,BufRead *.css setf css
   au BufNewFile,BufRead *.less setf less
-  au FileType css,less setlocal omnifunc=csscomplete#CompleteCSS
+  au FileType css,less setl omnifunc=csscomplete#CompleteCSS
+  au FileType css,less setl foldmethod=marker foldmarker={,}
   au FileType css,less set ts=2 sw=2 sts=2 et
 
   " Ruby
   au BufNewFile,BufRead *.rb setf ruby
   au FileType ruby set ts=2 sw=2 sts=2 et
-  au FileType ruby setlocal omnifunc=rubycomplete#Complete
+  au FileType ruby setl omnifunc=rubycomplete#Complete
 
   " Python
   au BufNewFile,BufRead *.py setf python
-  au FileType python setlocal omnifunc=pythoncomplete#Complete
+  au FileType python setl omnifunc=pythoncomplete#Complete
 
   " Enable omni completion.
-  "au filetype sql setlocal omnifunc=sqlcomplete#Complete
+  "au filetype sql setl omnifunc=sqlcomplete#Complete
 
   au BufNewFile,BufRead *.txt,*.text setf text
 

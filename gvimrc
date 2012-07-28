@@ -21,14 +21,16 @@ elseif g:MAC
   "set guifont=Monaco:h14
   set guifont=Inconsolata-dz:h12
   " Map Cmd+<n> to move to tab <n>.
-  for item in range(1,9)
-    silent exec "map <D-".item."> :tabn ".item."<cr>"
-    silent exec "map! <D-".item."> <C-O>:tabn ".item."<cr>"
+  for i in range(1,9)
+    sil exec "map <D-".i."> ".i."gt"
   endfor
+  map <D-0> :tablast<cr>
+  noremap <D-M-Left> :tabprev<cr>
+  noremap <D-M-Right> :tabnext<cr>
 
   macmenu &File.New\ Tab key=<nop>
   map <leader>t <Plug>PeepOpen
-  set transparency=8
+  set transparency=10
   set macmeta
   let macvim_hig_shift_movement = 1
   set antialias

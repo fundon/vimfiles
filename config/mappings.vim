@@ -225,6 +225,14 @@ inoremap <m-o> <C-o>o
 nnoremap <leader>2s :set sw=2 sts=2 ts=2<cr>
 nnoremap <leader>4s :set sw=4 sts=4 ts=4<cr>
 
+" Keep search matches in the middle of the window and pulse the line when moving
+" to them.
+nnoremap n n:call PulseCursorLine()<cr>
+nnoremap N N:call PulseCursorLine()<cr>
+
+" Search for diff separater stuff
+nnoremap <leader>fd /^←←←<\\|^=======\\|^→→→><cr>
+
 " 2}}}
 
 " 1}}}

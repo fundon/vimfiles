@@ -7,8 +7,8 @@ VIMFILES=$(cd "$(dirname "$CUR_PATH")"; pwd)
 __vim__help() {
   cat <<-help
 
-  Usage: vimfiles [options] [COMMAND] [config] 
-  
+  Usage: vimfiles [options] [COMMAND] [config]
+
   Commands:
     vimfiles install            install vimfiles
     vimfiles initmodules        init submodules

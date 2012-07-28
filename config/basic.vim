@@ -1,4 +1,5 @@
 " General " {{{1
+" http://vim.wikia.com/wiki/Best_Vim_Tips
 12" Requires for 256 colors in OS X iTerm(2)
 
 if has ('multi_byte')
@@ -6,8 +7,8 @@ if has ('multi_byte')
 endif
 
 if has('syntax')
+  syntax enable
   syntax on
-  syntax sync fromstart
   set background=dark
   sil! colorscheme solarized
 endif
@@ -29,7 +30,8 @@ endif
 
 if has('wildmenu')
   set wildmenu
-  set wildmode=longest:full,full
+  "set wildmode=longest:full,full
+  set wildmode=list:longest,full
   if has('wildignore')
     set wildignore+=*.a,*.o
     set wildignore+=*.bmp,*.gif,*.ico,*.jpg,*.png,*.psd
@@ -46,26 +48,11 @@ if has('extra_search')
 endif
 
 if has('folding')
+  set foldcolumn=0
   set foldenable
+  set foldlevel=0
   set foldmethod=marker
-  set foldlevel=7
-  set foldlevelstart=7
-
-  fun! MyFoldText()
-    let line = getline(v:foldstart)
-    let nucolwidth = &fdc + &number * &numberwidth
-    let windowwidth = winwidth(0) - nucolwidth - 3
-    let foldlinecount = v:foldend - v:foldstart
-    " expand tabs into spaces
-    let onetab = strpart('          ', 0, &tabstop)
-    let line = substitute(line, '\t', onetab, 'g')
-    let line = strpart(line, 0, windowwidth - 2 -len(foldlinecount))
-    let fillcharcount = windowwidth - len(line) - len(foldlinecount) - 4
-    let fillchars = repeat(" ",fillcharcount)
-    return line . '…' . fillchars . '…' . foldlinecount
-  endf
-  set foldtext=MyFoldText()
-  set foldlevel=100
+  set foldtext=FoldText()
 endif
 
 if v:lang =~? '^\(zh\)\|\(ja\)\|\(ko\)'
@@ -81,7 +68,7 @@ set backspace=indent,eol,start
 
 set timeoutlen=1200
 set ttimeoutlen=50
-set clipboard+=unnamed
+set clipboard=unnamed,unnamedplus,autoselect
 set pastetoggle=<F3>
 
 set tags=./tags;$HOME
@@ -97,10 +84,11 @@ set hidden
 set history=233
 
 if exists('&undodir')
+  let &undodir=g:MYVIM . "/undo"
   set undofile
   set undoreload=256
   set undolevels=100
-  let &undodir=g:MYVIM . "/undo"
+  set updatetime=1500
 endif
 
 " Backup
@@ -119,7 +107,7 @@ let g:is_posix = 1
 " }}}
 
 " Formatting {{{
-set formatoptions=tcqlron
+set formatoptions=tcrqwnl1
 
 " Edit
 set autoindent
@@ -127,6 +115,7 @@ set cindent
 set smartindent
 set shiftround
 set noshowmatch
+set virtualedit=block
 
 " Tab
 set smarttab
@@ -140,8 +129,10 @@ set display=lastline
 " }}}
 
 " Visual "{{{
-set mouse=a
+set mouse=nvr
 set mousehide
+
+set fillchars+=stl:\ ,stlnc:\
 
 set matchtime=2
 
@@ -151,6 +142,7 @@ set nonumber
 set textwidth=80
 set cursorline
 set colorcolumn=+1
+set nostartofline
 set nostartofline
 set linespace=0
 set lazyredraw
@@ -162,20 +154,25 @@ menu Encoding.gb2312 :e ++enc=gb2312<cr>
 menu Encoding.windows-1251 :e ++enc=cp1251<cr>
 menu Encoding.ibm-866 :e ++enc=ibm866<cr>
 
-set completeopt+=preview
+"set completeopt+=preview
+set completeopt=menu,longest
+set pumheight=10
+set confirm
 
-" Bell
-set novisualbell
-set noerrorbells
-set vb t_vb=
+" Disable all bells
+set novisualbell noerrorbells vb t_vb=
 
-set shortmess=aOtsT
+set shortmess=atToOI
+
+" Buf
+set switchbuf=useopen,usetab
 
 " Scroll
-set scrolloff=3
-set sidescrolloff=3
+set scrolloff=10
+set scrolljump=10
 if &diff && has('cursorbind')
     set scrollbind
+    set diffopt+=context:3
 endif
 
 set viewoptions=folds,cursor
@@ -203,11 +200,8 @@ set nrformats=octal,hex,alpha
 
 set list
 " Some other cool stuff to use: ᅴ ᗛ ← ↔ ↝ ↠ ↤ ↩ ↲ ↺ ↻ ⇐ ⇠ ⇤ ⇥ ⇰ ∞ ⌦ ⌫ ⌧ ⏎ ☢☥ ☯ ☹ ☺
-set listchars=tab:>-
-set listchars+=trail:.
-set listchars+=extends:#
-set listchars+=precedes:#
-set listchars+=eol:$
+"set listchars=tab:->,trail:·,eol:¬,nbsp:_
+set listchars=tab:→·,extends:>,precedes:<,nbsp:␠,trail:␠,eol:¬
 set showbreak=↪
 
 "blank-空白 buffers-缓冲区 curdir-当前目录 folds-折叠 help-帮助 options-选项
@@ -226,9 +220,6 @@ set fileformat=unix
 set fileformats=unix,mac,dos
 set encoding=utf-8 nobomb
 set termencoding=utf-8
-set fileencoding=utf-8
-set fileencodings=ucs-bom,utf-8,gbk,gb2312
-set fencs+=gb18030,big5,cp936,chinese
-set fencs+=euc-jp,euc-kr,latin1
+set fencs=utf-8,ucs-bom,gbk,gb2312,gb18030,big5,cp936,chinese,euc-jp,euc-kr,latin1
 
 " 1}}}

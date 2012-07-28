@@ -1,3 +1,5 @@
+// http://www.jshint.com/options/
+// vim: set ft=javascript:
 {
     // Settings
     "passfail"      : false,  // Stop on first error.                                                                                                       报错即停止
@@ -12,15 +14,17 @@
     "couch"         : false,
     "wsh"           : true,   // Windows Scripting Host.
 
-    "jquery"        : false,
+    "jquery"        : true,
     "prototypejs"   : false,
     "mootools"      : false,
     "dojo"          : false,
 
     "predef"        : [  // Custom globals.
-        //"exampleVar",
-        //"anotherCoolGlobal",
-        //"iLoveDouglas"
+      "$",
+      "define",
+      "Modernizr"
+      "escape",
+      "unescape"
     ],
 
 
@@ -32,14 +36,15 @@
     // EcmaScript 5.
     "es5"           : true,   // Allow EcmaScript 5 syntax.
     "strict"        : false,  // Require `use strict` pragma  in every file.
-    "globalstrict"  : false,  // Allow global "use strict" (also enables 'strict').
+    "globalstrict"  : true,   // Allow global "use strict" (also enables 'strict').
 
 
     // The Good Parts.
     "asi"           : false,  // Tolerate Automatic Semicolon Insertion (no semicolons).                                                                    分号
     "laxbreak"      : true,   // Tolerate unsafe line breaks e.g. `return [\n] x` without semicolons.                                                       换行
+    "laxcomma"      : true,   // Allow comma first
     "bitwise"       : false,  // Prohibit bitwise operators (&, |, ^, etc.).                                                                                位运算
-    "boss"          : false,  // Tolerate assignments inside if, for & while. Usually conditions & loops are for comparison, not assignments.               赋值语句
+    "boss"          : true,   // Tolerate assignments inside if, for & while. Usually conditions & loops are for comparison, not assignments.               赋值语句
     "curly"         : true,   // Require {} for every new block or scope.                                                                                   {} 包裹
     "eqeqeq"        : true,   // Require triple equals i.e. `===`.                                                                                          强比较
     "eqnull"        : false,  // Tolerate use of `== null`.                                                                                                 == 比较
@@ -54,8 +59,10 @@
     "regexdash"     : false,  // Tolerate unescaped last dash i.e. `[-...]`.
     "scripturl"     : true,   // Tolerate script-targeted URLs.
     "shadow"        : false,  // Allows re-define variables later in code e.g. `var x=1; x=2;`.
-    "supernew"      : false,  // Tolerate `new function () { ... };` and `new Object;`.
+    "supernew"      : true,   // Tolerate `new function () { ... };` and `new Object;`.
     "undef"         : true,   // Require all non-global variables be declared before they are used.                                                         全局，使用前先声明
+    "smarttabs"     : true,   // If smarttabs should be tolerated (http://www.emacswiki.org/emacs/SmartTabs).
+    "proto"         : true,   // If the `__proto__` property should be allowed.
 
 
     // Personal styling prefrences.
@@ -66,6 +73,6 @@
     "onevar"        : false,  // Allow only one `var` statement per function.
     "plusplus"      : false,  // Prohibit use of `++` & `--`.
     "sub"           : false,  // Tolerate all forms of subscript notation besides dot notation e.g. `dict['key']` instead of `dict.key`.
-    "trailing"      : true,   // Prohibit trailing whitespaces.
+    "trailing"      : false,  // Prohibit trailing whitespaces.
     "white"         : true    // Check against strict whitespace and indentation rules.                                                                     空白
 }

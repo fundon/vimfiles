@@ -5,7 +5,7 @@ if has('autocmd')
 augroup vimrcEx
   au!
 
-  autocmd BufReadPost *
+  au BufReadPost *
     \ if line("'\"") > 0 && line("'\"") <= line("$") |
     \ exe "normal g`\"" |
     \ endif
