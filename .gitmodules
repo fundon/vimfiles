@@ -127,3 +127,12 @@
 [submodule "bundle/neocomplcache"]
 	path = bundle/neocomplcache
 	url = git://github.com/Shougo/neocomplcache.git
+[submodule "bundle/go"]
+	path = bundle/go
+	url = git://github.com/gcatlin/go-vim.git
+[submodule "bundle/jade"]
+	path = bundle/jade
+	url = git://github.com/digitaltoad/vim-jade.git
+[submodule "bundle/stylus"]
+	path = bundle/stylus
+	url = git://github.com/wavded/vim-stylus.git

@@ -8,8 +8,18 @@ nnoremap k gk
 vnoremap j gj
 vnoremap k gk
 
+" Cursor jumps around while joining lines
+nnoremap J mzJ`z
+
+" Jumping lands on top or bottom of screen
+" <shift+m>
+nnoremap m nzz
+" <shift+}>
+nnoremap } }zz
+
 noremap / /\v
 noremap ? ?\v
+nnoremap Y y$
 
 nnoremap <c-z> :shell<cr>
 

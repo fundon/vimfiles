@@ -32,10 +32,19 @@ augroup filetypedetect
   let g:javascript_enable_domhtmlcss = 1
   let g:xml_use_xhtml = 1
 
+  " Jade
+  au BufNewFile,BufRead *.jade setf jade
+  au FileType jade setl omnifunc=jadecomplete#CompleteTags
+  au FileType jade set ts=2 sw=2 sts=2 et
+
   " Markdown
   au BufNewFile,BufRead *.{md,mkd,mark,markdown} setf mkd
   au FileType html,mkd setl omnifunc=htmlcomplete#CompleteTags
   au FileType mkd set ts=2 sw=2 sts=2 et
+
+  " Stylus
+  au BufNewFile,BufRead *.{styl,stylus} setf styl
+  au FileType styl set ts=2 sw=2 sts=2 et
 
   " Makefile
   au BufNewFile,BufRead {Makefile,makefile} setf make
@@ -106,6 +115,14 @@ augroup filetypedetect
   " Python
   au BufNewFile,BufRead *.py setf python
   au FileType python setl omnifunc=pythoncomplete#Complete
+
+  " Python
+  au BufNewFile,BufRead *.py setf python
+  au FileType python setl omnifunc=pythoncomplete#Complete
+
+  " GO
+  au BufNewFile,BufRead *.go setf go
+  au FileType go setl omnifunc=gocomplete#Complete
 
   " Enable omni completion.
   "au filetype sql setl omnifunc=sqlcomplete#Complete

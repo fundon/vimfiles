@@ -60,7 +60,7 @@ if v:lang =~? '^\(zh\)\|\(ja\)\|\(ko\)'
 endif
 
 " Set dictionary path
-set dictionary+=/usr/share/dict/words
+"set dictionary+=/usr/share/dict/words
 
 set cpoptions=aABceFsmq
 

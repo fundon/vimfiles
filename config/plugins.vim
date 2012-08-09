@@ -77,7 +77,7 @@ let g:ctrlp_tabpage_position = 'ac'
 let g:neocomplcache_enable_at_startup = 1
 
 " jscomplete
-let g:jscomplete_use = ['dom', 'moz']
+let g:jscomplete_use = ['dom', 'moz', 'node']
 
 " Mou.app
 let g:mou_dir = "$HOME/Apps/Mou.app"
