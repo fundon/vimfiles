@@ -1,6 +1,8 @@
 " Plugins " {{{
 
 let g:Powerline_symbols = 'fancy'
+let g:Powerline_stl_path_style = 'short'
+let g:Powerline_dividers_override = ['→', '>', '←', '<']
 
 let g:surround_{char2nr("t")} = "<\1\r..*\r&\1>\r\1\r..*\r&\1>"
 " Syntastic
@@ -81,5 +83,4 @@ let g:jscomplete_use = ['dom', 'moz', 'node']
 
 " Mou.app
 let g:mou_dir = "$HOME/Apps/Mou.app"
-
 " }}}

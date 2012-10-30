@@ -2,6 +2,10 @@
 " http://vim.wikia.com/wiki/Best_Vim_Tips
 12" Requires for 256 colors in OS X iTerm(2)
 
+if filereadable(expand("~/.vimrc.before"))
+  source ~/.vimrc.before
+endif
+
 if has ('multi_byte')
   scriptencoding utf-8
 endif
@@ -41,8 +45,8 @@ if has('wildmenu')
 endif
 
 if has('extra_search')
-  set hlsearch
   set incsearch
+  set hlsearch
   set ignorecase
   set smartcase
 endif
@@ -82,6 +86,7 @@ set autochdir
 
 set hidden
 set history=233
+set viminfo='100,f1
 
 if exists('&undodir')
   let &undodir=g:MYVIM . "/undo"
@@ -170,6 +175,8 @@ set switchbuf=useopen,usetab
 " Scroll
 set scrolloff=10
 set scrolljump=10
+set sidescrolloff=15
+set sidescroll=1
 if &diff && has('cursorbind')
     set scrollbind
     set diffopt+=context:3

@@ -1,5 +1,6 @@
 set columns=88
 set lines=55
+set gcr=a:blinkon0
 set guicursor+=a:blinkon0
 set guioptions=ace
 set guioptions-=mTlLrR

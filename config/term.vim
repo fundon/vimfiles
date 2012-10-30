@@ -5,15 +5,20 @@ set ttimeoutlen=10
 
 augroup FastEscape
   au!
+  au InsertEnter * set timeoutlen=0
   au InsertLeave * set timeoutlen=1000
 augroup END
 
 if exists('$TMUX')
-  let &t_SI = 'Ptmux;]12;#89b6e2\'
-  let &t_SI = 'Ptmux;]12;#dd4010\'
+  let &t_ti = "\<Esc>Ptmux;\<Esc>" . &t_ti . "\e[?1004h" . "\<Esc>\\"
+  let &t_te = "\<Esc>Ptmux;\<Esc>" . "\e[?1004l" . &t_te . "\<Esc>\\"
+  noremap <ESC>[O :echom "TEST"<cr>
 else
-  let &t_SI = "\<Esc>]50;CursorShape=1\x7"
-  let &t_EI = "\<Esc>]50;CursorShape=0\x7"
+  if &term =~ "xterm.*"
+    let &t_ti = &t_ti . "\e[?1004h"
+    let &t_te = "\e[?1004l" . &t_te
+    noremap <ESC>[O :echom "TEST"<cr>
+  endif
 endif
 
 set list

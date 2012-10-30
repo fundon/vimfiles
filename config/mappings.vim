@@ -167,7 +167,7 @@ noremap <silent><F7> :silent %s/\s\+$//g<cr>``
 
 " normal: 3id, insert ddd. :help .
 
-iab YDATE <C-R>=strftime("%H:%M:%S %m/%d/%Y")
+iab YDATE <C-R>=strftime("%Y-%m-%dT%H:%M%:%S UTC%z")
 map <silent><leader>d o<esc>:r!date +'\%H:\%M:\%S \%m/\%d/\%Y'<cr>\
   \:r!date +'\%H:\%M:\%S \%m/\%d/\%Y' \| sed 's/./-/g'<cr>A<cr><esc>
 
@@ -211,8 +211,14 @@ nnoremap <leader>n ::if &nu\|se rnu\
 " Toggle Background color
 nnoremap <leader>bg :let &bg = &bg == 'dark' ? 'light' : 'dark'<cr>
 
-" Toggle fold visibility
-nnoremap <leader>z za
+" Space to toggle folds
+nnoremap <space>z za
+vnoremap <Space>z za
+
+" "Refocus" folds
+nnoremap ,z zMzvzz
+
+nnoremap z0 zCz0
 
 " 2}}}
 
