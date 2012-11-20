@@ -41,7 +41,7 @@ let g:ackprg = "ack-grep -H --nocolor --nogroup --column"
 nnoremap <leader>rt :!ctags --extra=+f -R *<cr><cr>
 
 " Taglist
-let Tlist_Ctags_Cmd                 = $HOME . "/Develop/VD/bin/ctags"
+let Tlist_Ctags_Cmd                 = "/usr/local/bin/ctags"
 let Tlist_Auto_Highlight_Tag        = 0
 let Tlist_Auto_Open                 = 0
 let Tlist_Compact_Format            = 1
@@ -59,7 +59,7 @@ let Tlist_Use_SingleClick           = 1
 let Tlist_JS_Settings               = 'javascript;s:string;a:array;o:object;f:function'
 
 " Tarbar
-let g:tagbar_ctags_bin = $HOME . "/Develop/VD/bin/ctags"
+let g:tagbar_ctags_bin = "/usr/local/bin/ctags"
 nnoremap <silent><F6> :TagbarToggle<cr>
 
 " RagTag
