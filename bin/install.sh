@@ -8,6 +8,6 @@ ln -sf $VIMFILES/vimrc ~/.vimrc
 ln -sf $VIMFILES/gvimrc ~/.gvimrc
 ln -sf $VIMFILES/rc/jshintrc ~/.jshintrc
 
-(cd $VIMFILES \
-  && $CUR_PATH/initmodules.sh \
-  && $CUR_PATH/updatemodules.sh)
+#(cd $VIMFILES \
+#  && $CUR_PATH/initmodules.sh \
+#  && $CUR_PATH/updatemodules.sh)
