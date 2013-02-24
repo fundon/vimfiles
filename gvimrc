@@ -1,12 +1,8 @@
 set columns=88
 set lines=55
-set gcr=a:blinkon0
-set guicursor+=a:blinkon0
 set guioptions=ace
-set guioptions-=mTlLrR
-set mousehide
-
-let g:solarized_visibility='low'
+set guioptions-=TlLrR
+set guifont=Monaco:h14
 
 map <silent> <F11> :if &guioptions =~# 'T' <Bar>
   \ set guioptions-=T <Bar>
@@ -16,14 +12,19 @@ map <silent> <F11> :if &guioptions =~# 'T' <Bar>
   \ set guioptions+=m <Bar>
   \ endif<cr>
 
+highlight SpellBad term=underline gui=undercurl guisp=Orange
 
-if g:LINUX
-elseif g:MAC
-  "set guifont=Monaco:h14
-  set guifont=Inconsolata-dz:h12
+" Different cursors for different modes.
+set guicursor=n-c:block-Cursor-blinkon0
+set guicursor+=v:block-vCursor-blinkon0
+set guicursor+=i-ci:ver20-iCursor
+
+if $MAC
+  " Full screen means FULL screen
+  set fuoptions=maxvert,maxhorz
   " Map Cmd+<n> to move to tab <n>.
   for i in range(1,9)
-    sil exec "map <D-".i."> ".i."gt"
+    silent exec "map <D-".i."> ".i."gt"
   endfor
   map <D-0> :tablast<cr>
   noremap <D-M-Left> :tabprev<cr>
@@ -35,7 +36,31 @@ elseif g:MAC
   set macmeta
   let macvim_hig_shift_movement = 1
   set antialias
-elseif g:WIN
+
+  " Use the normal HIG movements, except for M-Up/Down
+  let macvim_skip_cmd_opt_movement = 1
+  no   <D-Left>       <Home>
+  no!  <D-Left>       <Home>
+  no   <M-Left>       <C-Left>
+  no!  <M-Left>       <C-Left>
+
+  no   <D-Right>      <End>
+  no!  <D-Right>      <End>
+  no   <M-Right>      <C-Right>
+  no!  <M-Right>      <C-Right>
+
+  no   <D-Up>         <C-Home>
+  ino  <D-Up>         <C-Home>
+  imap <M-Up>         <C-o>{
+
+  no   <D-Down>       <C-End>
+  ino  <D-Down>       <C-End>
+  imap <M-Down>       <C-o>}
+
+  imap <M-BS>         <C-w>
+  inoremap <D-BS>     <esc>my0c`y
+elseif $LINUX
+elseif $WIN
   set langmenu=zh_CN
   language messages zh_CN.utf-8
   source $VIMRUNTIME/delmenu.vim

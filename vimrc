@@ -5,11 +5,11 @@
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 
 " Check OS: {{{
-let $WIN   = has('win')
-let $LINUX = has('linux')
-let $MACOS = has('mac') || system('uname -s') =~ 'Darwin'
-let $TERM  = &term =~ 'term'
-let $MYVIM = $WIN ? expand('F:/develop/vim') : expand('~/.vim')
+let $WIN    = has('win')
+let $LINUX  = has('linux')
+let $MACOSX = has('mac') || system('uname -s') =~ 'Darwin'
+let $TERM   = &term =~ 'term'
+let $MYVIM  = $WIN ? expand('F:/develop/vim') : expand('~/.vim')
 
 " }}}
 

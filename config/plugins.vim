@@ -1,86 +1,184 @@
 " Plugins " {{{
+" Ack {{{
+nnoremap <leader>a :Ack!<space>
+let g:ackprg = 'ag --nogroup --nocolor --column'
+" }}}
 
-let g:Powerline_symbols = 'fancy'
-let g:Powerline_stl_path_style = 'short'
-let g:Powerline_dividers_override = ['→', '>', '←', '<']
+" Commentary {{{
+nmap <leader>c <Plug>CommentaryLine
+xmap <leader>c <Plug>Commentary
 
-let g:surround_{char2nr("t")} = "<\1\r..*\r&\1>\r\1\r..*\r&\1>"
-" Syntastic
-let g:syntastic_mode_map = {'mode': 'passive',
-  \ 'active_filetypes': [],
-  \ 'passive_filetypes': ['puppet']}
+augroup plugin_commentary
+  au!
+  au FileType sh setlocal commentstring=#\ %s
+augroup END
+" }}}
 
-"mark syntax errors with :signs
-let g:syntastic_enable_signs    = 1
-"automatically jump to the error when saving the file
-let g:syntastic_auto_jump       = 1
-"show the error list automatically
-let g:syntastic_auto_loc_list   = 1
-"don't care about warnings
-let g:syntastic_quiet_warnings  = 1
+" Ctrl-P {{{
+let g:ctrlp_dont_split = 'NERD_tree_2'
+let g:ctrlp_jump_to_buffer = 0
+let g:ctrlp_working_path_mode = 0
+let g:ctrlp_match_window_reversed = 1
+let g:ctrlp_split_window = 0
+let g:ctrlp_max_height = 20
+let g:ctrlp_extensions = ['tag']
 
-" NERDTree
+let g:ctrlp_map = '<leader>,'
+nnoremap <leader>. :CtrlPTag<cr>
+
+let g:ctrlp_prompt_mappings = {
+\ 'PrtSelectMove("j")':   ['<c-j>', '<down>', '<s-tab>'],
+\ 'PrtSelectMove("k")':   ['<c-k>', '<up>', '<tab>'],
+\ 'PrtHistory(-1)':       ['<c-n>'],
+\ 'PrtHistory(1)':        ['<c-p>'],
+\ 'ToggleFocus()':        ['<c-tab>'],
+\ }
+
+let ctrlp_filter_greps = "".
+    \ "egrep -iv '\\.(" .
+    \ "jar|class|swp|swo|log|so|o|pyc|jpe?g|png|gif|mo|po" .
+    \ ")$' | " .
+    \ "egrep -v '^(\\./)?(" .
+    \ "deploy/|lib/|classes/|libs/|deploy/vendor/|.git/|.hg/|.svn/|.*migrations/|docs/build/" .
+    \ ")'"
+
+let my_ctrlp_user_command = "" .
+    \ "find %s '(' -type f -or -type l ')' -maxdepth 15 -not -path '*/\\.*/*' | " .
+    \ ctrlp_filter_greps
+
+let my_ctrlp_git_command = "" .
+    \ "cd %s && git ls-files --exclude-standard -co | " .
+    \ ctrlp_filter_greps
+
+let my_ctrlp_ffind_command = "ffind --semi-restricted --dir %s --type e -B -f"
+
+let g:ctrlp_user_command = ['.git/', my_ctrlp_ffind_command, my_ctrlp_ffind_command]
+" }}}
+
+" Fugitive {{{
+nnoremap <leader>gd :Gdiff<cr>
+nnoremap <leader>gs :Gstatus<cr>
+nnoremap <leader>gw :Gwrite<cr>
+nnoremap <leader>ga :Gadd<cr>
+nnoremap <leader>gb :Gblame<cr>
+nnoremap <leader>gco :Gcheckout<cr>
+nnoremap <leader>gci :Gcommit<cr>
+nnoremap <leader>gm :Gmove<cr>
+nnoremap <leader>gr :Gremove<cr>
+nnoremap <leader>gl :Shell git gl -18<cr>:wincmd \|<cr>
+
+augroup ft_fugitive
+  au!
+  au BufNewFile,BufRead .git/index setlocal nolist
+augroup END
+
+" "Hub"
+nnoremap <leader>H :Gbrowse<cr>
+vnoremap <leader>H :Gbrowse<cr>
+" }}}
+
+" Gundo {{{
+nnoremap <F5> :GundoToggle<CR>
+
+let g:gundo_debug = 1
+let g:gundo_preview_bottom = 1
+let g:gundo_tree_statusline = "Gundo"
+let g:gundo_preview_statusline = "Gundo Preview"
+" }}}
+
+" HTML5 {{{
+let g:event_handler_attributes_complete = 0
+let g:rdfa_attributes_complete = 0
+let g:microdata_attributes_complete = 0
+let g:atia_attributes_complete = 0
+" }}}
+
+" Linediff {{{
+vnoremap <leader>l :Linediff<cr>
+nnoremap <leader>L :LinediffReset<cr>
+" }}}
+
+" NERD Tree {{{
+noremap  <F2> :NERDTreeToggle<cr>
+inoremap <F2> <esc>:NERDTreeToggle<cr>
+
+augroup ps_nerdtree
+  au!
+  au Filetype nerdtree setlocal nolist
+  " au Filetype nerdtree nnoremap <buffer> K :q<cr>
+augroup END
+
+let NERDTreeHighlightCursorline = 1
+let NERDTreeIgnore = ['.vim$', '\~$', '.*\.pyc$', 'pip-log\.txt$', 'whoosh_index',
+                    \ 'xapian_index', '.*.pid', 'monitor.py', '.*-fixtures-.*.json',
+                    \ '.*\.o$', 'db.db', 'tags.bak']
+
 let NERDTreeMinimalUI = 1
 let NERDTreeDirArrows = 1
-let NERDTreeWinPos    = "right"
-let g:NERDTreeWinSize = 30
-nnoremap <silent><F8> :NERDTreeToggle<cr>
-" Nerd Tree (reveal current file)
-nnoremap <leader>f :NERDTree<cr>:NERDTreeClose<cr>:NERDTreeFind<cr>
+let NERDChristmasTree = 1
+let NERDTreeChDirMode = 2
+let NERDTreeMapJumpFirstChild = 'gK'
+" }}}
 
-" NERDCommter
-if has("gui_macvim")
-  let macvim_skip_hig_shift_movement = 1
-  map <D-/> ,c<space>
-endif
+" Powerline {{{
+let g:Powerline_symbols = 'fancy'
+let g:Powerline_cache_enabled = 1
+let g:Powerline_stl_path_style = 'short'
+let g:Powerline_colorscheme = 'badwolf'
+let g:Powerline_dividers_override = ['→', '>', '←', '<']
+" }}}
 
-" Ack
-let g:ackprg = "ack-grep -H --nocolor --nogroup --column"
+" SLIMV {{{
+let g:slimv_leader = '\'
+let g:slimv_keybindings = 2
+let g:slimv_repl_name = 'SLIMV.REPL'
+let g:slimv_repl_split = 4
+" let g:slimv_repl_syntax = 0
+let g:slimv_repl_wrap = 0
+let g:slimv_preferred = 'clisp'
+let g:paredit_smartjump = 1
 
-" CTags
-nnoremap <leader>rt :!ctags --extra=+f -R *<cr><cr>
+" Use a swank command that works, and doesn't require new app windows.
+let g:slimv_swank_clojure = '!dtach -n /tmp/dtach-swank.sock -r winch lein ritz 4005'
+" let g:slimv_swank_clojure = '! xterm -e lein ritz 4005 &'
+let g:slimv_swank_clojure = '!false'
+" }}}}
 
-" Taglist
-let Tlist_Ctags_Cmd                 = "/usr/local/bin/ctags"
-let Tlist_Auto_Highlight_Tag        = 0
-let Tlist_Auto_Open                 = 0
-let Tlist_Compact_Format            = 1
-let Tlist_Exist_OnlyWindow          = 1
-let Tlist_WinWidth                  = 40
-let Tlist_GainFocus_On_ToggleOpen   = 1
-let Tlist_Show_Menu                 = 1
-let Tlist_Use_Right_Window          = 1
-let Tlist_Use_Horiz_Window          = 0
-let Tlist_Close_On_Select           = 1
-let Tlist_Show_One_File             = 1
-let Tlist_Enable_Fold_Column        = 0
-let Tlist_Display_Prototype         = 0
-let Tlist_Use_SingleClick           = 1
-let Tlist_JS_Settings               = 'javascript;s:string;a:array;o:object;f:function'
+" Supertab {{{
+let g:SuperTabDefaultCompletionType = "<c-n>"
+let g:SuperTabLongestHighlight = 1
+let g:SuperTabCrMapping = 1
+"}}}
 
-" Tarbar
-let g:tagbar_ctags_bin = "/usr/local/bin/ctags"
-nnoremap <silent><F6> :TagbarToggle<cr>
+" Syntastic {{{
+let g:syntastic_enable_signs = 1
+let g:syntastic_check_on_open = 1
+let g:syntastic_disabled_filetypes = ['html', 'rst']
+let g:syntastic_stl_format = '[%E{%e Errors}%B{, }%W{%w Warnings}]'
+"let g:syntastic_jsl_conf = '$HOME/.vim/jsl.conf'
+" }}}
 
-" RagTag
-let g:ragtag_global_maps = 1
+" tslime {{{
+let g:tslime_ensure_trailing_newlines = 1
+let g:tslime_normal_mapping = '<localleader>t'
+let g:tslime_visual_mapping = '<localleader>t'
+let g:tslime_vars_mapping = '<localleader>T'
+" }}}
 
-" Zencoding
-let g:user_zen_expandabbr_key = '<c-j>'
-let g:user_zen_settings       = {
-  \ 'indentation': ' ',
-  \}
+" YankRing {{{
+function! YRRunAfterMaps()
+    " Make Y yank to end of line.
+    nnoremap Y :<C-U>YRYankCount 'y$'<CR>
 
-" ctrip
-let g:ctrlp_map = '<c-p>'
-let g:ctrlp_tabpage_position = 'ac'
+    " Fix L and H in operator-pending mode, so yH and such works.
+    omap <expr> L YRMapsExpression("", "$")
+    omap <expr> H YRMapsExpression("", "^")
 
-" neocomplcache
-let g:neocomplcache_enable_at_startup = 1
+    " Don't clobber the yank register when pasting over text in visual mode.
+    vnoremap p :<c-u>YRPaste 'p', 'v'<cr>gv:YRYankRange 'v'<cr>
+endfunction
+" }}}
 
-" jscomplete
-let g:jscomplete_use = ['dom', 'moz', 'node']
-
-" Mou.app
-let g:mou_dir = "$HOME/Apps/Mou.app"
+" Surround {{{
+let g:surround_{char2nr("t")} = "<\1\r..*\r&\1>\r\1\r..*\r&\1>"
 " }}}

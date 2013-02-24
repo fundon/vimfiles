@@ -1,7 +1,5 @@
 set t_Co=256
 set termencoding=utf-8
-set ttyfast
-set ttimeoutlen=10
 
 augroup FastEscape
   au!

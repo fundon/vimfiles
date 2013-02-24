@@ -1,33 +1,297 @@
 " Key mappings " {{{1
-let mapleader = ','
+let mapleader = ","
+let maplocalleader = "\\"
 
-" Arrow keys
-nnoremap Q gq
-nnoremap j gj
-nnoremap k gk
-vnoremap j gj
-vnoremap k gk
+" Stop it, hash key.
+inoremap # X<BS>#
 
-" Cursor jumps around while joining lines
+" Kill window
+noremap K :q<cr>
+
+" Man
+nnoremap M K
+
+" Sort lines
+nnoremap <leader>s vip:!sort<cr>
+vnoremap <leader>s :!sort<cr>
+
+" Toggle line numbers
+nnoremap <leader>n ::if &nu\|se rnu\
+  \|elsei &rnu\|se rnu!\
+  \|el\|se nu\|endif<cr>
+
+" Tabs
+nnoremap <leader>( :tabprev<cr>
+nnoremap <leader>) :tabnext<cr>
+nnoremap <leader>tn :tabnew<cr>
+nnoremap <leader>tf :tabfirst<cr>
+nnoremap <leader>tl :tablast<cr>
+nnoremap <leader>lt :tabs<cr>
+nnoremap <leader>tt :call SwitchLastUsedTab()<cr>
+fun! SwitchLastUsedTab()
+  if exists("g:LastUsedTabPage")
+    exec "tabnext" g:LastUsedTabPage
+  endif
+endfun
+
+" Toggle paste
+" For some reason pastetoggle doesn't redraw the screen (thus the status bar
+" doesn't change) while :set paste! does, so I use that instead.
+" set pastetoggle=<F6>
+nnoremap <F6> :set paste!<cr>
+if $MACOSX " Max OXS pbcopy/pbpaste
+  nnoremap <silent><leader>p :call system('pbcopy', expand('%:p'))<cr>
+  vnoremap <leader>cp y:call system('pbcopy', getreg("\""))<cr>
+  nnoremap <leader>vv :call setreg("\"", system('pbpaste'))<cr>p
+elseif $LINUX " Linux
+  " copy current path
+  nnoremap <silent><leader>p :let @* = expand('%:p')<cr>
+  nnoremap <leader>cp y:call system("xclip -i -selection clipboard", getreg("\""))<cr>:call system("xclip -i", getreg("\""))<cr>
+  nnoremap <leader>vv :call setreg("\"", system("xclip -o -selection clipboard"))<cr>p
+endif
+" Allows multiple lines to be pasted correctly
+vnoremap p <Esc>:let current_reg = @"<CR>gvs<C-R>=current_reg<CR><Esc>
+
+" I constantly hit "u" in visual mode when I mean to "y". Use "gu" for those rare occasions.
+" From https://github.com/henrik/dotfiles/blob/master/vim/config/mappings.vim
+vnoremap u <nop>
+vnoremap gu u
+
+" Highlight Group(s)
+nnoremap <F8> :echo "hi<" . synIDattr(synID(line("."),col("."),1),"name") . '> trans<'
+  \ . synIDattr(synID(line("."),col("."),0),"name") . "> lo<"
+  \ . synIDattr(synIDtrans(synID(line("."),col("."),1)),"name") . ">"<CR>
+
+" Clean trailling whitespace ^M
+nnoremap <leader>w mz:%s/\s\+$//<cr>:let @/=''<cr>`z
+
+" Insert the directory of the current buffer in command line mode
+cnoremap <expr> %% getcmdtype() == ':' ? expand('%:h').'/' : '%%'
+
+" Select entire buffer
+nnoremap vaa ggvGg_
+nnoremap Vaa ggVG
+
+" "Uppercase word" mapping.
+"
+" This mapping allows you to press <c-u> in insert mode to convert the current
+" word to uppercase.  It's handy when you're writing names of constants and
+" don't want to use Capslock.
+"
+" To use it you type the name of the constant in lowercase.  While your
+" cursor is at the end of the word, press <c-u> to uppercase it, and then
+" continue happily on your way:
+"
+"                            cursor
+"                            v
+"     max_connections_allowed|
+"     <c-u>
+"     MAX_CONNECTIONS_ALLOWED|
+"                            ^
+"                            cursor
+"
+" It works by exiting out of insert mode, recording the current cursor location
+" in the z mark, using gUiw to uppercase inside the current word, moving back to
+" the z mark, and entering insert mode again.
+"
+" Note that this will overwrite the contents of the z mark.  I never use it, but
+" if you do you'll probably want to use another mark.
+inoremap <C-u> <esc>mzgUiw`za
+
+" Panic Button
+nnoremap <f9> mzggg?G`z
+
+" Use shell with ctrl-z
+nnoremap <c-z> :shell<cr>
+" Command Mode like terminal command
+cnoremap <c-a> <home>
+cnoremap <c-e> <end>
+cnoremap <c-p> <up>
+cnoremap <c-f> <right>
+cnoremap <c-n> <down>
+cnoremap <c-b> <left>
+cnoremap <c-d> <del>
+
+" Diffoff
+nnoremap <leader>D :diffoff!<cr>
+
+" Formatting, TextMate-style
+nnoremap Q gqip
+vnoremap Q gq
+noremap j gj
+noremap k gk
+noremap gj j
+noremap gk k
+
+" Reformat line.
+" I never use l as a macro register anyway.
+nnoremap ql gqq
+
+" Keep the cursor in place while joining lines
 nnoremap J mzJ`z
 
-" Jumping lands on top or bottom of screen
-" <shift+m>
-nnoremap m nzz
-" <shift+}>
-nnoremap } }zz
+" Easier linewise reselection
+nnoremap <leader>V V`]
 
-noremap / /\v
-noremap ? ?\v
+" Split line (sister to [J]oin lines)
+" The normal use of S is covered by cc, so don't worry about shadowing it.
+nnoremap S i<cr><esc>^mwgk:silent! s/\v +$//<cr>:noh<cr>`w
+
+" Source
+vnoremap <leader>S y:execute @@<cr>:echo 'Sourced selection.'<cr>
+nnoremap <leader>S ^vg_y:execute @@<cr>:echo 'Sourced line.'<cr>
+
+" Marks and Quotes
+noremap ' `
+noremap æ '
+noremap ` <C-^>
+
+" Select (charwise) the contents of the current line, excluding indentation.
+" Great for pasting Python lines into REPLs.
+nnoremap vv ^vg_
+
+" Sudo to write
+cnoremap w!! w !sudo tee % >/dev/null
+
+" Typos
+command! -bang E e<bang>
+command! -bang Q q<bang>
+command! -bang W w<bang>
+command! -bang QA qa<bang>
+command! -bang Qa qa<bang>
+command! -bang Wa wa<bang>
+command! -bang WA wa<bang>
+command! -bang Wq wq<bang>
+command! -bang WQ wq<bang>
+
+" I suck at typing.
+nnoremap <localleader>= ==
+vnoremap - =
+
+" Toggle [i]nvisible characters
+nnoremap <leader>i :set list!<cr>
+
+" Unfuck my screen
+nnoremap U :syntax sync fromstart<cr>:redraw!<cr>
+
+" <m-j>∆ and <m-k>˚ to drag lines in any mode
+noremap ∆ :m+<cr>
+noremap ˚ :m-2<cr>
+inoremap ∆ <esc>:m+<cr>
+inoremap ˚ <esc>:m-2<cr>
+vnoremap ∆ :m'>+<cr>gv
+vnoremap ˚ :m-2<cr>gv
+
+" Easy filetype switching
+nnoremap _md :set ft=markdown<cr>
+nnoremap _js :set ft=javascript<cr>
+nnoremap _d  :set ft=diff<cr>
+
+" Insert Mode Completion
+inoremap <c-f> <c-x><c-f>
+inoremap <c-]> <c-x><c-]>
+
+" Quick editing {{{
+nnoremap <leader>ev :vsplit $MVIMRC<cr>
+" }}}
+
+" Searching and moment {{{
+nnoremap / /\v
+vnoremap / /\v
+noremap <silent> <leader><space> :noh<cr>:call clearmatches()<cr>
+" Keep search matches in the middle of the window.
+nnoremap n nzzzv
+nnoremap N Nzzzv
+" }}}
+
+map <tab> %
+unmap [%
+unmap ]%
+
+" Made D behave
+nnoremap D d$
+
+" Backspace in Visual mode deletes selection
+vnoremap <bs> d
+
+" Don't move on *
+nnoremap * *<c-o>
+
+" Use c-\ to do c-] but open it in a new split.
+nnoremap <c-\> <c-w>v<c-]>zvzz
+
+" Same when jumping around
+nnoremap g; g;zz
+nnoremap g, g,zz
+nnoremap <c-o> <c-o>zz
+
+" Easier to type, and I never use the default behavior.
+noremap H ^
+noremap L $
 nnoremap Y y$
+vnoremap L g_
 
-nnoremap <c-z> :shell<cr>
+" Heresy
+inoremap <c-a> <esc>I
+inoremap <c-e> <esc>A
 
-" ctrl+j/ctrl+k to move up/right/down/left in insert mode
-inoremap <m-k> <C-o>gk
-inoremap <m-l> <C-o>l
-inoremap <m-j> <C-o>gj
-inoremap <m-h> <C-o>h
+" gi already moves to "last place you exited insert mode", so we'll map gI to
+" something similar: move to last change
+nnoremap gI `.
+
+" Fix linewise visual selection of various text objects
+nnoremap VV V
+nnoremap Vit vitVkoj
+nnoremap Vat vatV
+nnoremap Vab vabV
+nnoremap VaB vaBV
+
+" Toggle "keep current line in the center of the screen" mode
+nnoremap <leader>C :let &scrolloff=999-&scrolloff<cr>
+
+" Easy buffer navigation
+noremap <C-h> <C-w>h
+noremap <C-j> <C-w>j
+noremap <C-k> <C-w>k
+noremap <C-l> <C-w>l
+noremap <Leader>ls :buffers<cr>
+
+noremap <leader>v <C-w>v
+
+" Visual Mode */# from Scrooloose {{{
+
+function! s:VSetSearch()
+  let temp = @@
+  norm! gvy
+  let @/ = '\V' . substitute(escape(@@, '\'), '\n', '\\n', 'g')
+  let @@ = temp
+endfunction
+
+vnoremap * :<C-u>call <SID>VSetSearch()<CR>//<CR><c-o>
+vnoremap # :<C-u>call <SID>VSetSearch()<CR>??<CR><c-o>
+" }}}
+
+" List navigation {{{
+nnoremap <left>  :cprev<cr>zvzz
+nnoremap <right> :cnext<cr>zvzz
+nnoremap <up>    :lprev<cr>zvzz
+nnoremap <down>  :lnext<cr>zvzz
+" }}}
+
+" Folding  {{{
+" Space to toggle folds.
+nnoremap <Space> za
+vnoremap <Space> za
+" Make zO recursively open whatever top level fold we're in, no matter where the cursor happens to be.
+nnoremap zO zCzO
+" }}}
+
+" Shortcut for [] {{{
+onoremap ir i[
+onoremap ar a[
+vnoremap ir i[
+vnoremap ar a[
+" }}}
 
 " speed up scrolling of viewport slightly
 nnoremap <c-e> 3<c-e>
@@ -46,9 +310,6 @@ noremap <silent>ec :set fenc=cp936<cr><esc>:w!<cr>
 noremap <silent>eru :e ++enc=utf-8 %<cr>
 noremap <silent>erc :e ++enc=cp936 %<cr>
 
-" redraw map
-noremap <silent>sr :redraw!<cr>
-
 " Useful Shortcuts
 vnoremap <leader>c "+y
 vnoremap <leader>x "+d
@@ -56,29 +317,9 @@ nnoremap <leader>v "+P
 vnoremap <leader>v "+p
 nnoremap <leader>a ggVG
 
-" Allows multiple lines to be pasted correctly
-vnoremap p <Esc>:let current_reg = @"<CR>gvs<C-R>=current_reg<CR><Esc>
-
-if g:LINUX " Linux
-  " copy current path
-  nnoremap <silent><leader>p :let @* = expand('%:p')<cr>
-  nnoremap <leader>cp y:call system("xclip -i -selection clipboard", getreg("\""))<cr>:call system("xclip -i", getreg("\""))<cr>
-  nnoremap <leader>vv :call setreg("\"",system("xclip -o -selection clipboard"))<cr>p
-elseif g:MAC " Max OXS pbcopy/pbpaste
-  nnoremap <silent><leader>p :call system('pbcopy', expand('%:p'))<cr>
-  vnoremap <leader>cp y:call system('pbcopy', getreg("\""))<cr>
-  nnoremap <leader>vv :call setreg("\"",system('pbpaste'))<cr>p
-endif
-
-" Backspace in Visual mode deletes selection
-vnoremap <bs> d
-
 " Quickly edit/reload the vimrc file
 nnoremap <silent><leader>ev :tabedit $MYVIMRC<cr>
 nnoremap <silent><leader>sv :source $MYVIMRC<cr>
-
-" Sudo to write
-cmap w!! w !sudo tee % > /dev/null
 
 " Esc and Save
 imap jj <esc>
@@ -93,46 +334,6 @@ nnoremap <silent><leader>l :let @/=""<cr>
 vnoremap * y/<c-r>=escape(@", '\\/.*$^~[]')<cr><cr>
 vnoremap # y?<c-r>=escape(@", '\\/.*$^~[]')<cr><cr>
 
-" Use shell with ctrl-z
-nnoremap <c-z> :shell<cr>
-" Command Mode like terminal command
-cnoremap <c-a> <home>
-cnoremap <c-e> <end>
-cnoremap <c-p> <up>
-cnoremap <c-f> <right>
-cnoremap <c-n> <down>
-cnoremap <c-b> <left>
-cnoremap <c-d> <del>
-
-" Cursor
-" <s-i> line begin and insert
-nnoremap L $
-nnoremap H ^
-
-" Map Y to act like D and C, i.e. to yank until EOL, rather than act as yy,
-" which is the default
-nnoremap Y y$
-
-" Move Lines
-noremap <c-up> mz:m-2<cr>`z
-noremap <c-down> mz:m+<cr>`z
-
-" Tabs
-nnoremap <leader>lt :tabs<cr>
-nnoremap <leader>tn :tabnew<cr>
-nnoremap <leader>n :silent tabprev<cr>
-nnoremap <leader>m :silent tabnext<cr>
-nnoremap <leader>tf :silent tabfirst<cr>
-nnoremap <leader>tl :silent tablast<cr>
-nnoremap <c-tab>:silent tabnext<cr>
-nnoremap <c-s-tab>:silent tabprev<cr>
-nnoremap <leader>tt :call SwitchLastUsedTab()<cr>
-fun! SwitchLastUsedTab()
-  if exists("g:LastUsedTabPage")
-    exec "tabnext" g:LastUsedTabPage
-  endif
-endfun
-
 " Faster split resizing (+,-)
 if bufwinnr(1)
   nnoremap + <c-w>+
@@ -144,7 +345,7 @@ nnoremap <c-k> <c-w>k
 nnoremap <c-l> <c-w>l
 nnoremap <c-j> <c-w>j
 nnoremap <c-h> <c-w>h
-nnoremap <leader>w <c-w>v<c-w>l
+"nnoremap <leader>w <c-w>v<c-w>l
 
 " <c-0> rest
 map <c-kPlus> <c-w>+
@@ -158,13 +359,6 @@ noremap <s-tab> v<
 vnoremap <tab> >gv
 vnoremap <s-tab> <gv
 
-" ListChar
-noremap <silent><F4> :set invlist<cr>
-
-" Trim trailling whitespace ^M
-noremap <leader>M :%s/\r//g<cr>
-noremap <silent><F7> :silent %s/\s\+$//g<cr>``
-
 " normal: 3id, insert ddd. :help .
 
 iab YDATE <C-R>=strftime("%Y-%m-%dT%H:%M%:%S UTC%z")
@@ -175,9 +369,8 @@ map <silent><leader>d o<esc>:r!date +'\%H:\%M:\%S \%m/\%d/\%Y'<cr>\
 noremap <silent><leader>ee :emenu Encoding.<tab>
 noremap <leader>eo :e <c-r>=expand('%:h').'/'<cr>
 
-" :VD
-cnoremap VD $HOME/Develop/VD
-cnoremap WD $HOME/Works
+" Codes DIR
+cnoremap Codes $HOME/Codes
 
 " ctrl - ]
 norea #v # vim: set et ts=2 sts=2 sw=2 :<Esc>0f=
@@ -189,31 +382,14 @@ imap ^^ ↑
 imap VV ↓
 imap aa λ
 
-" Buffer navigation (,,) (,]) (,[) (,ls)
-map <Leader>, <C-^>
-" :map <Leader>] :bnext<CR>
-" :map <Leader>[ :bprev<CR>
-map <Leader>ls :buffers<CR>
 
 " Toggles {{{2
 
   " Toggle wrap/no wrap
 nnoremap <leader>wr :set nowrap! nowrap?<cr>
 
-" Toggle paste mode
-nnoremap <leader>pa :set paste! paste?<cr>
-
-" Toggle line numbers
-nnoremap <leader>n ::if &nu\|se rnu\
-  \|elsei &rnu\|se rnu!\
-  \|el\|se nu\|endif<cr>
-
 " Toggle Background color
 nnoremap <leader>bg :let &bg = &bg == 'dark' ? 'light' : 'dark'<cr>
-
-" Space to toggle folds
-nnoremap <space>z za
-vnoremap <Space>z za
 
 " "Refocus" folds
 nnoremap ,z zMzvzz
