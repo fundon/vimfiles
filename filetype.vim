@@ -35,6 +35,7 @@ augroup END
 
 augroup ft_css
   au!
+  au BufNewFile,BufRead *.css setf css
   au BufNewFile,BufRead *.less setf less
   au FileType css,less setl foldmethod=marker foldmarker={,} omnifunc=csscomplete#CompleteCSS iskeyword+=-
 
