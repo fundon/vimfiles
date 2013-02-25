@@ -57,4 +57,4 @@
 	url = git://github.com/AndrewRadev/linediff.vim.git
 [submodule "bundle/markdown"]
 	path = bundle/markdown
-	url = git://github.com/mikewest/vim-markdown.git
+	url = git://github.com/tpope/vim-markdown.git
