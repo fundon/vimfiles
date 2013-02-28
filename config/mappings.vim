@@ -110,7 +110,14 @@ cnoremap <c-p> <up>
 cnoremap <c-f> <right>
 cnoremap <c-n> <down>
 cnoremap <c-b> <left>
-cnoremap <c-d> <del>
+cnoremap <c-d> <delete>
+cnoremap <M-b> <s-left>
+cnoremap <M-f> <s-right>
+cnoremap <M-d> <s-right><delete>
+cnoremap <esc>b <s-left>
+cnoremap <esc>f <s-right>
+cnoremap <esc>d <s-right><delete>
+cnoremap <c-g> <c-c>
 
 " Diffoff
 nnoremap <leader>D :diffoff!<cr>
