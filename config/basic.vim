@@ -2,7 +2,7 @@
 
 " Encoding
 scriptencoding utf-8
-set encoding=utf-8
+set encoding=utf-8 nobomb
 set fileencodings=utf-8,cp936,gbk
 set fileformat=unix
 set fileformats=unix,mac,dos
@@ -17,7 +17,7 @@ let g:is_posix = 1
 set shell=/bin/bash\ --login
 
 set modeline
-set modelines=5
+set modelines=0
 
 " cmdline_info
 set nowrap
@@ -36,12 +36,12 @@ set backspace=indent,eol,start
 " extra_search
 set magic
 set wrapscan
-set gdefault
-set matchpairs+=<:>
-set incsearch
-set hlsearch
 set ignorecase
 set smartcase
+set gdefault
+set incsearch
+set hlsearch
+set matchpairs+=<:>
 
 " Scroll
 set nostartofline
@@ -109,11 +109,11 @@ set shiftround
 set noshowmatch
 set virtualedit+=block
 
-set expandtab
-set smarttab
-set shiftwidth=2
 set tabstop=2
+set shiftwidth=2
 set softtabstop=2
+set expandtab
+"set smarttab
 
 set mouse=a
 set mousehide
@@ -126,7 +126,7 @@ set matchtime=3
 set linebreak
 set breakat=\ |@-+;:,./?^I
 set nonumber
-set textwidth=80
+set textwidth=79
 set cursorline
 set colorcolumn=+1
 set linespace=0

@@ -138,7 +138,7 @@ nnoremap ql gqq
 nnoremap J mzJ`z
 
 " Easier linewise reselection
-nnoremap <leader>V V`]
+nnoremap <leader>v V`]
 
 " Split line (sister to [J]oin lines)
 " The normal use of S is covered by cc, so don't worry about shadowing it.
@@ -329,7 +329,7 @@ nnoremap <silent><leader>ev :tabedit $MYVIMRC<cr>
 nnoremap <silent><leader>sv :source $MYVIMRC<cr>
 
 " Esc and Save
-imap jj <esc>
+inoremap jj <esc>
 inoremap <leader>, <esc>
 vnoremap <leader>, <esc>
 nnoremap <leader>q :q!<esc>
@@ -348,11 +348,11 @@ if bufwinnr(1)
 endif
 
 " Move Windoes
-nnoremap <c-k> <c-w>k
-nnoremap <c-l> <c-w>l
-nnoremap <c-j> <c-w>j
 nnoremap <c-h> <c-w>h
-"nnoremap <leader>w <c-w>v<c-w>l
+nnoremap <c-j> <c-w>j
+nnoremap <c-l> <c-w>l
+nnoremap <c-k> <c-w>k
+nnoremap <leader>w <c-w>v<c-w>l
 
 " <c-0> rest
 map <c-kPlus> <c-w>+
@@ -388,7 +388,6 @@ imap << ←
 imap ^^ ↑
 imap VV ↓
 imap aa λ
-
 
 " Toggles {{{2
 
@@ -432,6 +431,11 @@ nnoremap N N:call PulseCursorLine()<cr>
 " Search for diff separater stuff
 nnoremap <leader>fd /^←←←<\\|^=======\\|^→→→><cr>
 
+nnoremap <leader>ft Vatzf
+
 " 2}}}
+
+" CSS properties sorted
+nnoremap <leader>S ?{<CR>jV/^\s*\}?$<CR>k:sort<CR>:noh<CR>
 
 " 1}}}

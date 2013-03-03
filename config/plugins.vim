@@ -27,28 +27,28 @@ let g:ctrlp_map = '<leader>,'
 nnoremap <leader>. :CtrlPTag<cr>
 
 let g:ctrlp_prompt_mappings = {
-\ 'PrtSelectMove("j")':   ['<c-j>', '<down>', '<s-tab>'],
-\ 'PrtSelectMove("k")':   ['<c-k>', '<up>', '<tab>'],
-\ 'PrtHistory(-1)':       ['<c-n>'],
-\ 'PrtHistory(1)':        ['<c-p>'],
-\ 'ToggleFocus()':        ['<c-tab>'],
-\ }
+  \ 'PrtSelectMove("j")':   ['<c-j>', '<down>', '<s-tab>'],
+  \ 'PrtSelectMove("k")':   ['<c-k>', '<up>', '<tab>'],
+  \ 'PrtHistory(-1)':       ['<c-n>'],
+  \ 'PrtHistory(1)':        ['<c-p>'],
+  \ 'ToggleFocus()':        ['<c-tab>'],
+  \ }
 
 let ctrlp_filter_greps = "".
-    \ "egrep -iv '\\.(" .
-    \ "jar|class|swp|swo|log|so|o|pyc|jpe?g|png|gif|mo|po" .
-    \ ")$' | " .
-    \ "egrep -v '^(\\./)?(" .
-    \ "deploy/|lib/|classes/|libs/|deploy/vendor/|.git/|.hg/|.svn/|.*migrations/|docs/build/" .
-    \ ")'"
+  \ "egrep -iv '\\.(" .
+  \ "jar|class|swp|swo|log|so|o|pyc|jpe?g|png|gif|mo|po" .
+  \ ")$' | " .
+  \ "egrep -v '^(\\./)?(" .
+  \ "deploy/|lib/|classes/|libs/|deploy/vendor/|.git/|.hg/|.svn/|.*migrations/|docs/build/" .
+  \ ")'"
 
 let my_ctrlp_user_command = "" .
-    \ "find %s '(' -type f -or -type l ')' -maxdepth 15 -not -path '*/\\.*/*' | " .
-    \ ctrlp_filter_greps
+  \ "find %s '(' -type f -or -type l ')' -maxdepth 15 -not -path '*/\\.*/*' | " .
+  \ ctrlp_filter_greps
 
 let my_ctrlp_git_command = "" .
-    \ "cd %s && git ls-files --exclude-standard -co | " .
-    \ ctrlp_filter_greps
+  \ "cd %s && git ls-files --exclude-standard -co | " .
+  \ ctrlp_filter_greps
 
 let my_ctrlp_ffind_command = "ffind --semi-restricted --dir %s --type e -B -f"
 
@@ -167,15 +167,15 @@ let g:tslime_vars_mapping = '<localleader>T'
 
 " YankRing {{{
 function! YRRunAfterMaps()
-    " Make Y yank to end of line.
-    nnoremap Y :<C-U>YRYankCount 'y$'<CR>
+  " Make Y yank to end of line.
+  nnoremap Y :<C-U>YRYankCount 'y$'<CR>
 
-    " Fix L and H in operator-pending mode, so yH and such works.
-    omap <expr> L YRMapsExpression("", "$")
-    omap <expr> H YRMapsExpression("", "^")
+  " Fix L and H in operator-pending mode, so yH and such works.
+  omap <expr> L YRMapsExpression("", "$")
+  omap <expr> H YRMapsExpression("", "^")
 
-    " Don't clobber the yank register when pasting over text in visual mode.
-    vnoremap p :<c-u>YRPaste 'p', 'v'<cr>gv:YRYankRange 'v'<cr>
+  " Don't clobber the yank register when pasting over text in visual mode.
+  vnoremap p :<c-u>YRPaste 'p', 'v'<cr>gv:YRYankRange 'v'<cr>
 endfunction
 " }}}
 
