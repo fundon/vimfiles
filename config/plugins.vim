@@ -184,5 +184,5 @@ let g:surround_{char2nr("t")} = "<\1\r..*\r&\1>\r\1\r..*\r&\1>"
 " }}}
 
 " Git Gutter {{{
-let g:gitgutter_enabled = 1
+let g:gitgutter_enabled = 0
 " }}}

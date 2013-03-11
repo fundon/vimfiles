@@ -49,6 +49,7 @@ set scrolloff=3
 set scrolljump=7
 set sidescrolloff=10
 set sidescroll=1
+set diff
 if &diff && has('cursorbind')
   set scrollbind
   set diffopt+=context:3
