@@ -1,7 +1,7 @@
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" Vim: set et sw=2 ts=2 sts=2 ft=vim ff=unix fenc=utf-8 :	"
 " Author:     cfddream						"
 " Email:      cfddream[at]gmail.com				"
-" Vim: set et sw=2 ts=2 sts=2 ft=vim ff=unix fenc=utf-8		"
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 
 " Check OS: {{{
