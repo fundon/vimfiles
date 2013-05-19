@@ -134,6 +134,7 @@ augroup END
 
 augroup ft_make
   au!
+  au BufNewFile,BufRead {m,M}akefile setf make
   au FileType make set noet
 augroup END
 
