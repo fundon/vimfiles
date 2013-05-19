@@ -3,6 +3,7 @@ set lines=55
 set guioptions=ace
 set guioptions-=TlLrR
 set guifont=Monaco:h14
+set background=light
 
 map <silent> <F11> :if &guioptions =~# 'T' <Bar>
   \ set guioptions-=T <Bar>
