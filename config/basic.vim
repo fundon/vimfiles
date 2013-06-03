@@ -1,200 +1,209 @@
-" General " {{{1
+set encoding=utf-8
+set clipboard+=unnamed
+set pastetoggle=<F10>
 
-" Encoding
-scriptencoding utf-8
-set encoding=utf-8 nobomb
-set fileencodings=utf-8,cp936,gbk
-set fileformat=unix
-set fileformats=unix,mac,dos
+" Basically this makes terminal Vim work sanely.
+set timeoutlen=250
+set notimeout
+set ttimeout
+set ttimeoutlen=10
 
-set helplang=cn,en
-if v:lang =~? '^\(zh\)\|\(ja\)\|\(ko\)'
-  set ambiwidth=double
-endif
-
-let g:is_posix = 1
-
-set shell=/bin/bash\ --login
+set history=256
+set nobackup
+set nowritebackup 
+set noswapfile
+set undodir=$MYVIM/undo
+set undoreload=10000
+set undofile
 
 set modeline
-set modelines=0
+set modelines=5
 
-" cmdline_info
-set nowrap
-set ruler
-set showcmd
+" "}}}
+
+set scrolloff=3
+
+set shiftround
+
 set showmode
-set report=0
 
 set hidden
+
 set ttyfast
-set visualbell
-set t_vb=
 
-set backspace=indent,eol,start
+set ruler
 
-" extra_search
-set magic
-set wrapscan
 set ignorecase
 set smartcase
 set gdefault
 set incsearch
 set hlsearch
-set matchpairs+=<:>
 
-" Scroll
-set nostartofline
-set scrolloff=3
-set scrolljump=7
-set sidescrolloff=10
-set sidescroll=1
-set diff
-if &diff && has('cursorbind')
-  set scrollbind
-  set diffopt+=context:3
-endif
+" Formatting "{{{
+set ft+=o
+set fo-=r
+set fo-=t
 
-" statusline
-set laststatus=2
-" Broken down into easily includeable segments
-set statusline=%<%f\                     " Filename
-set statusline+=%w%h%m%r                 " Options
-set statusline+=%{fugitive#statusline()} " Git Hotness
-set statusline+=\ [%{&ff}/%Y]            " Filetype
-set statusline+=\ [%{getcwd()}]          " Current dir
-set statusline+=%=%-14.(%l,%c%V%)\ %p%%  " Right aligned file nav info
-
-" folding
-set foldcolumn=0
-set foldenable
-set foldlevel=0
-set foldlevelstart=0
-set foldmethod=marker
-set foldtext=FoldText()
-
-set cpoptions=aABceFsmq
-
-set clipboard=unnamed,unnamedplus,autoselect
-set pastetoggle=<F3>
-
-set tags=./tags;$HOME
-
-set autoread
-set autowrite
-set autochdir
-
-" Backup
-set nobackup
-set nowritebackup
-set directory=/tmp//
-set noswapfile
-
-set history=1000
-set viminfo='100,f1
-if exists('&undodir')
-  let &undodir=$MYVIM . "/undo"
-  set undofile
-  set undoreload=10000
-  if !isdirectory(expand(&undodir))
-    call mkdir(expand(&undodir), "p")
-  endif
-endif
-
-set formatoptions=qrn1
-
-set autoindent
-set cindent
-set smartindent
-set shiftround
-set noshowmatch
-set virtualedit+=block
+set wrap
+set textwidth=79
 
 set tabstop=2
 set shiftwidth=2
 set softtabstop=2
 set expandtab
-"set smarttab
+set smarttab
+
+set backspace=indent,eol,start
+
+set autoindent
+set cindent
+set indentkeys-=0#
+set cinkeys-=0#
+set cinoptions=:s,ps,ts,cs
+set cinwords=if,else,while,do
+set cinwords+=for,switch,case
+" "}}}
+
+" Visual "{{{
+syntax on
 
 set mouse=a
 set mousehide
 
-set fillchars=diff:⣿,vert:│
-set fillchars+=stl:\ ,stlnc:\
-
-set matchtime=3
-
-set linebreak
-set breakat=\ |@-+;:,./?^I
 set nonumber
-set textwidth=79
-set cursorline
-set colorcolumn=+1
-set linespace=0
-set lazyredraw
+set showmatch
+set matchtime=2
 
-set wildcharm=<tab>
-menu Encoding.utf-8 :e ++enc=utf-8<cr>
-menu Encoding.cp936 :e ++enc=cp936<cr>
+set wildmenu
+set wildmode=longest,list
 
-set pumheight=10
-set confirm
+set completeopt+=preview
 
-set shortmess=atToOI
+set novisualbell
+set noerrorbells
+set vb t_vb=
 
-" Buf
-set switchbuf=useopen,usetab
+set laststatus=2
+set shortmess=atI
+set showcmd
 
-set viewoptions=folds,cursor
+set statusline=%<%f\ 
+set stl+=[%{&ff}]
+set stl+=%y%m%r%=
+set stl+=%-14.(%l,%c%V%)\ %P
 
-set equalalways
+set foldenable
+set foldmethod=marker
+set foldlevel=100
+
+set foldopen=block,hor,tag
+set foldopen+=percent,mark
+set foldopen+=quickfix
+
+set virtualedit=block
+
 set splitbelow
 set splitright
 
-" Better Completion
-set complete=.,w,b,u,t
-set completeopt=longest,menuone,preview
-
-" Enable CTRL-A/CTRL-X to work on octal and hex numbers, as well as characters
-set nrformats=alpha,hex,octal
-
 set list
-" Some other cool stuff to use: ᅴ ᗛ ← ↔ ↝ ↠ ↤ ↩ ↲ ↺ ↻ ⇐ ⇠ ⇤ ⇥ ⇰ ∞ ⌦ ⌫ ⌧ ⏎ ☢☥ ☯ ☹ ☺
-set listchars=tab:▸\ ,eol:¬,extends:❯,precedes:❮
+set listchars=tab:▸\ ,eol:¬
+set listchars+=trail:·
+set listchars+=extends:»,precedes:«
 set showbreak=↪
 
-"blank-空白 buffers-缓冲区 curdir-当前目录 folds-折叠 help-帮助 options-选项
-"tabpages-选项卡 winsize-窗口大小 slash-转换文件路径中的\为/以使session文件兼容unix
-"unix-设置session文件中的换行模式为unix
-set sessionoptions=blank,buffers,curdir,folds,help,options,tabpages,winsize,slash,unix,resize
+" "}}}
 
-set title
-set titlestring=Vim:\ %f\ %h%r%m
+set number
+set cursorline
+set cursorcolumn
 
-set dictionary=/usr/share/dict/words
-let &spellfile=$MYVIM . '/custom-dictionary.utf-8.add'
+set autoread
+set autowrite
+set autochdir
 
-" Don't try to highlight lines longer than 800 characters.
-set synmaxcol=800
+" Mappings {{{
 
-" Basically this makes terminal Vim work sanely.
-set notimeout
-set ttimeout
-set ttimeoutlen=10
+let g:is_posix = 1
+let mapleader = ","
+let maplocalleader = '  '
 
-" wildmenu
-set wildmenu
-set wildmode=list:longest,full
-set wildignore+=.git,.hg,.svn
-set wildignore+=*.a,*.o,*.obj,*~
-set wildignore+=*.bmp,*.gif,*.ico,*.jpg,*.png,*.psd
-set wildignore+=*~,*.sw?,*.tmp
-set wildignore+=*.pyc,*.luac
-set wildignore+=.DS_Store
+inoremap <F1> <Esc>
+nnoremap <F1> <Esc>
+vnoremap <F1> <Esc>
+inoremap jj <Esc>
+noremap <leader><leader> <Esc>
+noremap <localleader><space> <Esc>
+noremap j gj
+noremap k gk
 
-syntax on
-set background=dark
-let g:badwolf_tabline = 2
-let g:badwolf_html_link_underline = 0
-colorscheme badwolf
-" 1}}}
+" Buffers "{{{
+nnoremap <localleader>- :bd<CR>
+nnoremap <localleader>-- :bd!<CR>
+" }}}
+
+nnoremap <leader>1 yypVr=
+nnoremap <leader><space> :noh<cr>
+nnoremap <tab> %
+vnoremap <tab> %
+map <silent> <F9> :set invlist<CR>
+
+nnoremap <leader>W :%s/\s\+$//<cr>:let @/=''<CR>
+
+" fold tag for HTML
+nnoremap <leader>ft Vatzf
+" Sorted CSS properties
+nnoremap <leader>S ?{<CR>jV/^\s*\}?$<CR>k:sort<CR>:noh<CR>
+
+nnoremap <leader>q gqip
+
+nnoremap <leader>v V`]
+
+nnoremap <leader>ev <C-w><C-v><C-l>:e $MYVIMRC<cr>
+
+" open a new vertical split
+nnoremap <leader>w <C-w>v<C-w>l
+
+" Split line(opposite to S-J joining line)
+nnoremap <C-J> gEa<CR><ESC>ew
+
+nnoremap <C-h> <C-w>h
+nnoremap <C-j> <C-w>j
+nnoremap <C-k> <C-w>k
+nnoremap <C-l> <C-w>l
+
+nmap <C-J> {
+nmap <C-K> }
+
+" copy filename 
+map <silent> <leader>. :let @+=expand('%:p').':'.line('.')<CR>
+" " copy path
+map <silent> <leader>/ :let @+=expand('%:p:h')<CR>
+
+" Duplication
+nnoremap <leader>c mz"dyy"dp`z
+vnoremap <leader>c "dymz"dP`z
+
+" Tabs "{{{
+nnoremap <M-h> :tabprev<CR>
+nnoremap <M-l> :tabnext<CR>
+" "}}}
+
+" Search {{{
+
+nnoremap / /\v
+vnoremap / /\v
+
+" }}}
+
+" Indent
+noremap <tab> v>
+noremap <s-tab> v<
+vnoremap <tab> >gv
+vnoremap <s-tab> <gv
+
+" }}}
+
+
+" AB "{{{
+"ab # encoding: UTF-8 # encoding: UTF-8
+" "}}}

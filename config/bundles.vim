@@ -40,4 +40,6 @@ Bundle 'groenewege/vim-less'
 Bundle 'tsaleh/vim-matchit'
 Bundle 'vim-scripts/ctags.vim'
 
+Bundle 'mattn/zencoding-vim'
+
 " }}}
