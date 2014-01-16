@@ -1,30 +1,43 @@
 " Runtime Configs: {{{
 filetype off
 
-"switch opening and closing html/xml tags or if/elseif/else/end
-runtime macros/matchit.vim
+let $NEOBUNDLE_DIR = $MYVIM . '/.bundle'
 
-"runtime config/pathogen.vim
-
-filetype plugin indent on
-set nocompatible
-
-"runtime config/basic.vim
-
-if $TERM
-  "runtime config/term.vim
+if has('vim_starting') 
+  set nocompatible               " Be iMproved
+  set runtimepath+=$NEOBUNDLE_DIR/neobundle
 endif
 
-"runtime scripts.vim
-"runtime config/functions.vim
-"runtime config/auto.vim
-"runtime config/mappings.vim
-"runtime config/style.vim
-"runtime config/plugins.vim
-"run config/command.vim
-"run config/dict.vim
+call neobundle#rc(expand($NEOBUNDLE_DIR))
 
+" Let NeoBundle manage NeoBundle
+"NeoBundleFetch 'Shougo/neobundle.vim'
 
-runtime config/tmp.vim
+runtime config/bundle.vim
+
+filetype plugin indent on     " Required!
+
+" Enable syntax color.
+syntax enable
+
+" Installation check.
+NeoBundleCheck
+
+""switch opening and closing html/xml tags or if/elseif/else/end
+"runtime macros/matchit.vim
+
+runtime config/functions.vim
+runtime config/basic.vim
+"
+"if $TERM
+"  "runtime config/term.vim
+"endif
+"
+""runtime scripts.vim
+""runtime config/auto.vim
+""runtime config/mappings.vim
+""runtime config/style.vim
+""run config/command.vim
+""run config/dict.vim
 
 " }}}

@@ -1,7 +1,7 @@
 #!/bin/bash
 modules=".gitmodules"
 n=1
-l=`cat $modules | wc -l | cut -d ' ' -f1`
+l=`cat $modules | wc -l | tr -d ' '`
 path=""
 url=""
 
@@ -15,3 +15,5 @@ while test $n -lt $l; do
     && git submodule add "$url" "$path"
   let 'n = n + 3'
 done
+
+git submodule init
