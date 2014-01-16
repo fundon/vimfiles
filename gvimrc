@@ -2,7 +2,7 @@ set columns=88
 set lines=55
 set guioptions=ace
 set guioptions-=TlLrR
-set guifont=Monaco:h14
+set guifont=Monaco:h12
 
 map <silent> <F11> :if &guioptions =~# 'T' <Bar>
   \ set guioptions-=T <Bar>
@@ -12,7 +12,10 @@ map <silent> <F11> :if &guioptions =~# 'T' <Bar>
   \ set guioptions+=m <Bar>
   \ endif<cr>
 
-highlight SpellBad term=underline gui=undercurl guisp=Orange
+hi SpellBad term=underline gui=undercurl guisp=Orange
+
+hi Cursor  guifg=White guibg=DodgerBlue3       
+hi iCursor guifg=White guibg=LightGreen
 
 " Different cursors for different modes.
 set guicursor=n-c:block-Cursor-blinkon0
