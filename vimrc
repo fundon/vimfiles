@@ -1,5 +1,5 @@
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-" Vim: set et sw=2 ts=2 sts=2 ft=vim ff=unix fenc=utf-8 :       "
+" vim: set et sw=2 ts=2 sts=2 ft=vim ff=unix fenc=utf-8 :       "
 " Author:     fundon                                            "
 " Email:      cfddream[at]gmail.com                             "
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""

@@ -27,7 +27,6 @@ set smarttab
 set expandtab
 set shiftround
 set modeline
-set modelines=0
 
 set tabstop=2
 set shiftwidth=2
@@ -37,7 +36,7 @@ set softtabstop=2
 if has('unnamedplus')
 	set clipboard& clipboard+=unnamedplus
 else
-    	set clipboard& clipboard+=unnamed
+  set clipboard& clipboard+=unnamed
 endif
 
 set backspace=indent,eol,start
@@ -71,6 +70,26 @@ set grepprg=grep\ -inH
 " Exclude = from isfilename.
 set isfname-==
 
+" Undo: "{{{
+set history=1000
+set viminfo='100,f1
+if exists('&undodir')
+  let &undodir=$MYVIM. '/undo'
+  set undofile
+  set undoreload=10000
+  if !isdirectory(expand(&undodir))
+    call mkdir(expand(&undodir), "p")
+  endif
+endif
+"}}}
+
+" Backup: "{{{
+set nobackup
+set nowritebackup
+set noswapfile
+"set directory=/tmp//
+" }}}
+
 "set helplang=cn,en
 "if v:lang =~? '^\(zh\)\|\(ja\)\|\(ko\)'
 "  set ambiwidth=double
@@ -81,21 +100,18 @@ set isfname-==
 "set shell=/bin/bash\ --login
 
 
-"" cmdline_info
+" cmdline_info
 "set nowrap
 "set ruler
 "set showcmd
 "set showmode
 "set report=0
-"
+
 "set ttyfast
 "set visualbell
 "set t_vb=
-"
-"
-"" extra_search
-"
-"" Scroll
+
+" Scroll
 "set nostartofline
 "set scrolloff=3
 "set scrolljump=7
@@ -106,8 +122,8 @@ set isfname-==
 "  set scrollbind
 "  set diffopt+=context:3
 "endif
-"
-"" statusline
+
+" statusline
 "set laststatus=2
 "" Broken down into easily includeable segments
 "set statusline=%<%f\                     " Filename
@@ -116,49 +132,28 @@ set isfname-==
 "set statusline+=\ [%{&ff}/%Y]            " Filetype
 "set statusline+=\ [%{getcwd()}]          " Current dir
 "set statusline+=%=%-14.(%l,%c%V%)\ %p%%  " Right aligned file nav info
-"
-"" folding
-"
-"
+
+
 "set pastetoggle=<F3>
 "
 "set tags=./tags;$HOME
-"
-"" Backup
-"set nobackup
-"set nowritebackup
-"set directory=/tmp//
-"set noswapfile
-"
-"set history=1000
-"set viminfo='100,f1
-"if exists('&undodir')
-"  let &undodir=g:myvim . "/undo"
-"  set undofile
-"  set undoreload=10000
-"  if !isdirectory(expand(&undodir))
-"    call mkdir(expand(&undodir), "p")
-"  endif
-"endif
-"
+
+
+
 "set formatoptions=qrn1
-"
+
 "set autoindent
 "set cindent
 "set smartindent
 "set virtualedit+=block
-"
-"set tabstop=2
-"set shiftwidth=2
-"set softtabstop=2
-"
+
 "set mouse=a
 "set mousehide
 "
 "set fillchars=diff:⣿,vert:│
 "set fillchars+=stl:\ ,stlnc:\
-"
-"
+
+
 "set linebreak
 "set breakat=\ |@-+;:,./?^I
 "set nonumber
@@ -167,17 +162,17 @@ set isfname-==
 "set colorcolumn=+1
 "set linespace=0
 "set lazyredraw
-"
+
 "set wildcharm=<tab>
 "menu Encoding.utf-8 :e ++enc=utf-8<cr>
 "menu Encoding.cp936 :e ++enc=cp936<cr>
-"
+
 "set pumheight=10
 "set confirm
-"
+
 "set shortmess=atToOI
-"
-"" Buf
+
+" Buf
 "set switchbuf=useopen,usetab
 "
 "set viewoptions=folds,cursor
@@ -185,7 +180,7 @@ set isfname-==
 "set equalalways
 "set splitbelow
 "set splitright
-"
+
 "" Better Completion
 "set complete=.,w,b,u,t
 "set completeopt=longest,menuone,preview
