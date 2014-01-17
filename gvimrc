@@ -22,7 +22,7 @@ set guicursor=n-c:block-Cursor-blinkon0
 set guicursor+=v:block-vCursor-blinkon0
 set guicursor+=i-ci:ver20-iCursor
 
-if $MAC
+if g:mac
   " Full screen means FULL screen
   set fuoptions=maxvert,maxhorz
   " Map Cmd+<n> to move to tab <n>.
@@ -62,8 +62,8 @@ if $MAC
 
   imap <M-BS>         <C-w>
   inoremap <D-BS>     <esc>my0c`y
-elseif $LINUX
-elseif $WIN
+elseif g:linux
+elseif g:win
   set langmenu=zh_CN
   language messages zh_CN.utf-8
   source $VIMRUNTIME/delmenu.vim

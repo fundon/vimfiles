@@ -64,7 +64,6 @@ augroup ft_css
   "au BufNewFile,BufRead *.less,*.css inoremap <buffer> {<cr> {}<left><cr><space><space>.<cr><esc>kA<bs>
 augroup END
 
-let g:html_indent_tags = ['p', 'li']
 augroup ft_html
   au!
   au BufNewFile,BufRead *.html,*.mustache,*.ejs setf html

@@ -1,5 +1,5 @@
 " General: " {{{
-"
+
 " Encoding: "{{{
 scriptencoding utf-8
 set encoding=utf-8 nobomb
@@ -90,10 +90,14 @@ set noswapfile
 "set directory=/tmp//
 " }}}
 
-"set helplang=cn,en
-"if v:lang =~? '^\(zh\)\|\(ja\)\|\(ko\)'
-"  set ambiwidth=double
-"endif
+set helplang=cn
+set ambiwidth=double
+
+" Mouse: "{{{
+set mousemodel=extend
+set nomousefocus
+set mousehide
+"}}}
 
 "let g:is_posix = 1
 
