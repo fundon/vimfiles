@@ -8,15 +8,12 @@ augroup FastEscape
 augroup END
 
 if exists('$TMUX')
-  let &t_ti = "\<Esc>Ptmux;\<Esc>" . &t_ti . "\e[?1004h" . "\<Esc>\\"
-  let &t_te = "\<Esc>Ptmux;\<Esc>" . "\e[?1004l" . &t_te . "\<Esc>\\"
-  noremap <ESC>[O :echom "TEST"<cr>
-else
-  if &term =~ "xterm.*"
-    let &t_ti = &t_ti . "\e[?1004h"
-    let &t_te = "\e[?1004l" . &t_te
-    noremap <ESC>[O :echom "TEST"<cr>
-  endif
+  let &t_SI = "\<Esc>Ptmux;\<Esc>\<Esc>]50;CursorShape=1\x7\<Esc>\\"
+  let &t_EI = "\<Esc>Ptmux;\<Esc>\<Esc>]50;CursorShape=0\x7\<Esc>\\"
+elseif &term =~ "xterm.*"
+  let &t_SI = "\<Esc>]50;CursorShape=1\x7"
+  let &t_EI = "\<Esc>]50;CursorShape=0\x7"
+  au VimLeave * silent !echo -ne "\<Esc>]50;CursorShape=0\x7"
 endif
 
 set list
