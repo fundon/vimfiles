@@ -133,6 +133,7 @@ augroup END
 
 augroup ft_make
   au!
+  au BufNewFile,BufRead Makefile,makefile setf make
   au FileType make set noet
 augroup END
 
