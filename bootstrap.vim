@@ -28,14 +28,14 @@ NeoBundleCheck
 
 runtime config/functions.vim
 runtime config/basic.vim
-"
-"if $TERM
-"  "runtime config/term.vim
-"endif
+
+if g:term
+  runtime config/term.vim
+endif
 "
 ""runtime scripts.vim
 ""runtime config/auto.vim
-""runtime config/mappings.vim
+runtime config/mappings.vim
 ""runtime config/style.vim
 ""run config/command.vim
 ""run config/dict.vim
