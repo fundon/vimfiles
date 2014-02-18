@@ -1,3 +1,5 @@
+set ambiwidth=double
+
 set columns=88
 set lines=55
 set guioptions=ace
