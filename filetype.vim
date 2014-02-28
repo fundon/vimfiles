@@ -144,13 +144,18 @@ augroup END
 
 augroup ft_sh
   au!
-  au BufNewFile,BufRead *.sh,.zshrc setf sh
+  au BufNewFile,BufRead *.sh,*.zsh,.zshrc setf sh
   au FileType sh call s:Dict()
 augroup END
 
 augroup ft_text
   au!
   au BufNewFile,BufRead *.txt,*.text setf text
+augroup END
+
+augroup ft_sql
+  au!
+  au BufNewFile,BufRead *.sql setf sql
 augroup END
 
 augroup ft_vim
