@@ -8,38 +8,52 @@ set fileformat=unix
 set fileformats=unix,mac,dos
 
 if has('multi_byte_ime')
-	set iminsert=0 imsearch=0
+  set iminsert=0 imsearch=0
 endif
+" }}}
+
+" Status: "{{{
+set laststatus=2
+set list
+" Some other cool stuff to use: ᅴ ᗛ ← ↔ ↝ ↠ ↤ ↩ ↲ ↺ ↻ ⇐ ⇠ ⇤ ⇥ ⇰ ∞ ⌦ ⌫ ⌧ ⏎ ☢☥ ☯ ☹ ☺
+set listchars=tab:▸\ ,eol:¬,extends:❯,precedes:❮
+"set showbreak=↪
 " }}}
 
 " Ssearch: "{{{
 set ignorecase
+set incsearch
 set smartcase
 set hlsearch
 set wrapscan
 set magic
 set gdefault
-set incsearch
 " }}}
 
 " Edit: "{{{
-set smarttab
+"set smarttab
 set expandtab
 set shiftround
 set modeline
 
-set tabstop=2
+set tabstop=8
 set shiftwidth=2
 set softtabstop=2
 
 " Use clipboard register.
 if has('unnamedplus')
-	set clipboard& clipboard+=unnamedplus
+  set clipboard& clipboard+=unnamedplus
 else
   set clipboard& clipboard+=unnamed
 endif
 
 set backspace=indent,eol,start
+
+set number
+set ruler
+set showcmd
+
+set scrolloff=3
 
 set showmatch
 set matchtime=3
@@ -52,6 +66,7 @@ set hidden
 set autoread
 set autowrite
 set autochdir
+set autoindent
 
 set infercase
 " }}}
@@ -91,9 +106,9 @@ set noswapfile
 " }}}
 
 set helplang=cn
-set ambiwidth=double
 
 " Mouse: "{{{
+set mouse=a
 set mousemodel=extend
 set nomousefocus
 set mousehide
@@ -106,18 +121,15 @@ set mousehide
 
 " cmdline_info
 "set nowrap
-"set ruler
-"set showcmd
 "set showmode
 "set report=0
 
-"set ttyfast
+set ttyfast
 "set visualbell
-"set t_vb=
+set t_vb=
 
 " Scroll
 "set nostartofline
-"set scrolloff=3
 "set scrolljump=7
 "set sidescrolloff=10
 "set sidescroll=1
@@ -142,18 +154,12 @@ set mousehide
 "
 "set tags=./tags;$HOME
 
-
-
 "set formatoptions=qrn1
 
-"set autoindent
 "set cindent
 "set smartindent
 "set virtualedit+=block
 
-"set mouse=a
-"set mousehide
-"
 "set fillchars=diff:⣿,vert:│
 "set fillchars+=stl:\ ,stlnc:\
 
@@ -192,10 +198,6 @@ set mousehide
 "" Enable CTRL-A/CTRL-X to work on octal and hex numbers, as well as characters
 "set nrformats=alpha,hex,octal
 "
-"set list
-"" Some other cool stuff to use: ᅴ ᗛ ← ↔ ↝ ↠ ↤ ↩ ↲ ↺ ↻ ⇐ ⇠ ⇤ ⇥ ⇰ ∞ ⌦ ⌫ ⌧ ⏎ ☢☥ ☯ ☹ ☺
-"set listchars=tab:▸\ ,eol:¬,extends:❯,precedes:❮
-"set showbreak=↪
 "
 ""blank-空白 buffers-缓冲区 curdir-当前目录 folds-折叠 help-帮助 options-选项
 ""tabpages-选项卡 winsize-窗口大小 slash-转换文件路径中的\为/以使session文件兼容unix
@@ -216,15 +218,16 @@ set mousehide
 "set ttimeout
 "set ttimeoutlen=10
 "
-"" wildmenu
-"set wildmenu
-"set wildmode=list:longest,full
-"set wildignore+=.git,.hg,.svn
-"set wildignore+=*.a,*.o,*.obj,*~
-"set wildignore+=*.bmp,*.gif,*.ico,*.jpg,*.png,*.psd
-"set wildignore+=*~,*.sw?,*.tmp
-"set wildignore+=*.pyc,*.luac
-"set wildignore+=.DS_Store
+" Wildmenu: "{{{
+set wildmenu
+set wildmode=longest,list,full
+set wildignore+=.git,.hg,.svn
+set wildignore+=*.a,*.o,*.obj,*~
+set wildignore+=*.bmp,*.gif,*.ico,*.jpg,*.png,*.psd
+set wildignore+=*~,*.sw?,*.tmp
+set wildignore+=*.pyc,*.luac
+set wildignore+=.DS_Store
+" }}}
 
 " ColorScheme: "{{{
 set background=dark
