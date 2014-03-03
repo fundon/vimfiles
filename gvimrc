@@ -72,9 +72,5 @@ elseif g:win
   source $VIMRUNTIME/menu.vim
 
   autocmd GUIEnter * simalt ~x
-  set guifont=Monaco:h10:cANSI
-  set guifontwide=YaHei\ Mono:h10
-  set shell=D:/cygwin/bin/bash
-  set shellcmdflag=--login\ -c
-  set shellxquote=\"
+  set guifont=Inconsolata-g:h13 " Monaco:h10:cANSI
 endif
