@@ -4,7 +4,7 @@ set columns=88
 set lines=55
 set guioptions=ace
 set guioptions-=TlLrR
-set guifont=Monaco:h12
+set guifont=Inconsolata-g:h13
 
 map <silent> <F11> :if &guioptions =~# 'T' <Bar>
   \ set guioptions-=T <Bar>
@@ -72,5 +72,9 @@ elseif g:win
   source $VIMRUNTIME/menu.vim
 
   autocmd GUIEnter * simalt ~x
-  set guifont=Inconsolata-g:h13 " Monaco:h10:cANSI
+  set guifont=Monaco:h10:cANSI
+  set guifontwide=YaHei\ Mono:h10
+  set shell=D:/cygwin/bin/bash
+  set shellcmdflag=--login\ -c
+  set shellxquote=\"
 endif
