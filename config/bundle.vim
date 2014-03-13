@@ -25,3 +25,9 @@ NeoBundle 'bling/vim-airline', { 'name': 'airline' }
 NeoBundle 'majutsushi/tagbar'
 
 NeoBundle 'gcmt/wildfire.vim', { 'name': 'wildfire' }
+
+NeoBundle 'kchmck/vim-coffee-script', { 'name': 'coffee' }
+
+NeoBundle 'mattn/benchvimrc-vim.git', { 'name': 'benchvimrc' }
+
+NeoBundle 'pangloss/vim-javascript', { 'name': 'javascript' }
